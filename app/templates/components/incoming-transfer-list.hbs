@@ -1,0 +1,22 @@
+<table class="incoming-transfers-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Transfer Id</th>
+      <th>Value</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each sortedList as |incomingTransfer|}}
+      <tr>
+        <td class="incoming-transfer-date">{{incomingTransfer.date}}</td>
+        <td class="incoming-transfer-transferId">{{incomingTransfer.transferId}}</td>
+        <td class="incoming-transfer-value">{{money incomingTransfer.value}}</td>
+        <td>
+          <button class="delete" {{action "remove" incomingTransfer}}>Delete</button>
+        </td>
+      </tr>
+    {{/each}}
+</tbody>
+</table>

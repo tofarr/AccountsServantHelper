@@ -35,5 +35,37 @@ export default Service.extend({
         });
       }, reject);
     });
+  },
+
+  weftsBalance(){
+    return new RSVP.Promise((resolve, reject) => {
+      this.get('store').findAll('meeting').then((meetings) => {
+
+        var balance = {
+          value: 0,
+          lastMeeting: null,
+          lastWefts: null
+        }
+
+        meetings.forEach((meeting) => {
+          balance.value += meeting.get('worldwide');
+          if((!balance.lastMeeting) || (balance.lastMeeting < meeting.get('date'))){
+            balance.lastMeeting = meeting.get('date');
+          }
+        });
+
+        this.get('store').findAll('weft').then((wefts) => {
+          wefts.forEach((weft) => {
+            balance.value -= weft.get('worldwide');
+            if((!balance.lastWefts) || (balance.lastWefts < deposit.get('date'))){
+              balance.lastWefts = weft.get('date');
+            }
+          });
+
+          resolve(balance);
+
+        }, reject);
+      }, reject);
+    });
   }
 });

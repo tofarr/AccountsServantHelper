@@ -1,0 +1,25 @@
+
+html,body,div{
+  box-sizing: border-box;
+}
+
+.s26-input,.s26-head-field,.s26-field,.s26-row{
+  font-size: 24px;
+}
+.s26-head-field{
+  position:absolute;
+  height:48px;
+  line-height:48px;
+  padding-left: 10px;
+  text-align: center;
+}
+.s26-field{
+  top: 0;
+  position:absolute;
+  height: 33px;
+  line-height: 33px;
+}
+.s26-row .s26-input{
+  line-height: 33px;
+}
+.

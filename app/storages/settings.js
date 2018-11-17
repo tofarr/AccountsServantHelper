@@ -6,6 +6,7 @@ Storage.reopenClass({
   initialState() {
     return {
       openingBalance: 0,
+      otherBalance: 0,
       congregation: null,
       city: null,
       state: null,

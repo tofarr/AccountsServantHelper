@@ -67,5 +67,19 @@ export default Service.extend({
         }, reject);
       }, reject);
     });
+  },
+
+  firstMeeting(){
+    return new RSVP.Promise((resolve, reject) => {
+      this.get('store').findAll('meeting').then((meetings) => {
+        var firstMeeting = null;
+        meetings.forEach((meeting) => {
+          if((!firstMeeting) || (firstMeeting > meeting.get('date'))){
+            firstMeeting = meeting.get('date');
+          }
+        });
+        resolve(firstMeeting);
+      }, reject);
+    })
   }
 });

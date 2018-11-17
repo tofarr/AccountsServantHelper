@@ -1,3 +1,68 @@
 {{outlet}}
 <button {{action "print"}}>Print</button>
-<img src="/assets/images/S-26-1.png" />
+<div class="s26-page s26-page-1" style="background-image:url('/assets/images/S-26-1.png');position:relative;top:0;left:0;width:1700px;height:2200px;">
+  <div class="s26-head-field congregation" style="left:53px;top:100px;width:528px;">{{model.congregation}}</div>
+  <div class="s26-head-field city" style="left:620px;top:100px;width:339px;">{{model.city}}</div>
+  <div class="s26-head-field state" style="left:998px;top:100px;width:213px;">{{model.state}}</div>
+  <div class="s26-head-field month" style="left:1250px;top:100px;width:237px;">{{model.month}}</div>
+  <div class="s26-head-field year" style="left:1526px;top:100px;width:121px;">{{model.year}}</div>
+
+  <div class="s26-rows" style="position:absolute;left:57px;top:287px;width:1586px;">
+    {{#each model.rows as |row|}}
+      <div class="s26-row" style="display:flex;flex-direction:row;height:32.222px;margin-bottom:1px;">
+        <div class="s26-input" style="width:63px;line-height:33px;text-align:center;">{{row.date}}</div>
+        <div class="s26-input" style="width:580px;margin-left:1px;padding-left:10px;">{{row.description}}</div>
+        <div class="s26-input" style="width:49px;margin-left:1px;text-align:center;">{{row.tc}}</div>
+        <div class="s26-input" style="width:148.5px;margin-left:1px;text-align:right;padding-right:25px;">{{money row.receiptsIn}}</div>
+        <div class="s26-input" style="width:148.5px;margin-left:1px;text-align:right;padding-right:25px;">{{money row.receiptsOut}}</div>
+        <div class="s26-input" style="width:148.5px;margin-left:1px;text-align:right;padding-right:25px;">{{money row.checkingAccountIn}}</div>
+        <div class="s26-input" style="width:148.5px;margin-left:1px;text-align:right;padding-right:25px;">{{money row.checkingAccountOut}}</div>
+      </div>
+      {{#each row.subRows as |subRow|}}
+        <div class="s26-row" style="display:flex;flex-direction:row;height:32.222px;margin-bottom:1px;">
+          <div class="s26-input" style="padding-left:93px;width:580px;margin-left:1px;">{{subRow}}</div>
+        </div>
+      {{/each}}
+    {{/each}}
+
+    <div style="position: absolute;left:694px;top:1727px;display:flex;flex-direction:row;height:63px;">
+      <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money receiptsIn}}</div>
+      <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money receiptsOut}}</div>
+      <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money checkingAccountIn}}</div>
+      <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money checkingAccountOut}}</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="s26-page s26-page-2" style="background-image:url('/assets/images/S-26-2.png');position:relative;top:0;left:0;width:1700px;height:2200px;">
+
+  <div class="s26-row" style="position: absolute;left:752px;top:198px;display:flex;flex-direction:row;height:33px;">
+    <div class="s26-input" style="width:149px;margin-right:1px;line-height:33px;text-align:right;padding-right:23px;">{{money receiptsIn}}</div>
+    <div class="s26-input" style="width:149px;margin-right:1px;line-height:33px;text-align:right;padding-right:23px;">{{money receiptsOut}}</div>
+    <div class="s26-input" style="width:149px;margin-right:1px;line-height:33px;text-align:right;padding-right:23px;">{{money checkingAccountIn}}</div>
+    <div class="s26-input" style="width:149px;margin-right:1px;line-height:33px;text-align:right;padding-right:23px;">{{money checkingAccountOut}}</div>
+  </div>
+
+  <div style="position: absolute;left:752px;top:963px;display:flex;flex-direction:row;height:63px;">
+    <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money receiptsIn}}</div>
+    <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money receiptsOut}}</div>
+    <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money checkingAccountIn}}</div>
+    <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money checkingAccountOut}}</div>
+  </div>
+
+  <div class="s26-field" style="left:424px;top:1131px;width:393px;line-height:33px;padding-left:10px;text-align:center;">{{model.monthEnding}}</div>
+  <div class="s26-field" style="left:414px;top:1264px;width:153px;text-align:right;padding-right:10px;">{{money receiptsIn}}</div>
+  <div class="s26-field" style="left:414px;top:1297px;width:153px;text-align:right;padding-right:10px;">{{money receiptsOut}}</div>
+  <div class="s26-field" style="left:648px;top:1329px;width:169px;text-align:right;padding-right:10px;">{{money receiptsBalance}}</div>
+
+  <div class="s26-field" style="left:414px;top:1475px;width:153px;text-align:right;padding-right:10px;">{{money model.openingBalance}}</div>
+  <div class="s26-field" style="left:414px;top:1509px;width:153px;text-align:right;padding-right:10px;">{{money checkingAccountIn}}</div>
+  <div class="s26-field" style="left:414px;top:1541px;width:153px;text-align:right;padding-right:10px;">{{money checkingAccountOut}}</div>
+  <div class="s26-field" style="left:648px;top:1575px;width:169px;text-align:right;padding-right:10px;">{{money checkingAccountBalance}}</div>
+
+  <div class="s26-field" style="left:414px;top:1721px;width:153px;text-align:right;padding-right:10px;">{{money model.otherBalance}}</div>
+  <div class="s26-field" style="left:648px;top:1819px;width:169px;text-align:right;padding-right:10px;">{{money model.otherBalance}}</div>
+
+  <div class="s26-field" style="left:648px;top:1890px;width:169px;">{{money closingAccountBalance}}</div>
+</div>

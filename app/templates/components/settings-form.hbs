@@ -1,10 +1,11 @@
 <fieldset>
   <legend>{{title}}</legend>
-  {{number-field title="Opening Balance" value=model.openingBalance}}
-  {{number-field title="KHAHC" value=model.KHAHC}}
-  {{number-field title="GAA" value=model.GAA}}
-  {{number-field title="COAA" value=model.COAA}}
-  {{number-field title="CT" value=model.CT}}
+  {{money-field title="Opening Balance" value=model.openingBalance}}
+  {{money-field title="Default Outgoing Cheque Amount" value=model.defaultOutgoingChequeAmt}}
+  {{money-field title="KHAHC" value=model.KHAHC}}
+  {{money-field title="GAA" value=model.GAA}}
+  {{money-field title="COAA" value=model.COAA}}
+  {{money-field title="CT" value=model.CT}}
   <div class="submit">
     <button type="submit">{{submitText}}</button>
   </div>

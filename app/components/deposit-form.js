@@ -5,15 +5,16 @@ import add from '../utils/add';
 
 export default Component.extend({
   tagName: 'form',
-  classNames: ['meeting-form'],
+  classNames: ['deposit-form'],
   classNameBindings: ['valid:valid:invalid'],
-  title: 'New Meeting',
+  title: 'New Deposit',
   submitText: 'Save Changes',
-  meetings: inject('meetings'),
+  deposits: inject('deposits'),
 
-  valid: computed('model.{date,local,worldwide,cash,cheques}', function(){
-    return this.get('meetings').isValid(this.get('model'));
+  valid: computed('model.{date,forLastMeeting,cash,cheques}', function(){
+    return this.get('deposits').isValid(this.get('model'));
   }),
 
-  total : add('model.local','model.worldwide')
+  total: add('model.cash','model.cheques')
+
 });

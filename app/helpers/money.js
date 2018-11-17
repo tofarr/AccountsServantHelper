@@ -1,7 +1,8 @@
 import { helper } from '@ember/component/helper';
+import m from '../utils/money';
 
 export function money([value]) {
-  return (value / 100).toFixed(2);
+  return m(value);
 }
 
 export default helper(money);

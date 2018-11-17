@@ -1,0 +1,26 @@
+<table class="deposits-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Last Meeting</th>
+      <th>Cash</th>
+      <th>Cheques</th>
+      <th>Total</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each sortedList as |deposit|}}
+      <tr>
+        <td class="deposit-date">{{deposit.date}}</td>
+        <td class="deposit-forLastdeposit">{{deposit.forLastMeeting}}</td>
+        <td class="deposit-cash">{{money deposit.cash}}</td>
+        <td class="deposit-cheques">{{money deposit.cheques}}</td>
+        <td class="deposit-total">{{money deposit.total}}</td>
+        <td>
+          <button class="delete" {{action "remove" deposit}}>Delete</button>
+        </td>
+      </tr>
+    {{/each}}
+</tbody>
+</table>

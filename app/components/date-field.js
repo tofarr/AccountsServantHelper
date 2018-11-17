@@ -3,6 +3,7 @@ import moment from 'moment';
 import { computed } from '@ember/object';
 
 export default Component.extend({
+  tagName: 'label',
   classNames: ['field', 'date-field'],
   title: 'Date',
 

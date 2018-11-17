@@ -6,6 +6,7 @@
       <th>Worldwide</th>
       <th>Cash</th>
       <th>Cheques</th>
+      <th>Total</th>
       <th>&nbsp;</th>
     </tr>
   </thead>
@@ -17,8 +18,9 @@
         <td class="meeting-worldwide">{{money meeting.worldwide}}</td>
         <td class="meeting-cash">{{money meeting.cash}}</td>
         <td class="meeting-cheques">{{money meeting.cheques}}</td>
+        <td class="meeting-total">{{money meeting.total}}</td>
         <td>
-          <button class="delete" {{action "destroy" meeting}}>Delete</button>
+          <button class="delete" {{action "remove" meeting}}>Delete</button>
         </td>
       </tr>
     {{/each}}

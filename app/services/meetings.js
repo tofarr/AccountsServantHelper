@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { inject } from '@ember/service';
-import Meeting from '../models/meeting';
 import moment from 'moment';
 import RSVP from 'rsvp';
 
@@ -42,7 +41,7 @@ export default Service.extend({
     return record.save();
   },
 
-  destroy(record){
+  remove(record){
     record.deleteRecord();
     return record.save();
   }

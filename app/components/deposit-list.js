@@ -6,8 +6,8 @@ export default Component.extend({
   sortedList: sort('list', 'entriesSorting'),
 
   actions: {
-    remove(meeting){
-      this.get('remove')(meeting);
+    remove(deposit){
+      this.get('remove')(deposit);
     }
   }
 });

@@ -6,6 +6,7 @@ Storage.reopenClass({
   initialState() {
     return {
       openingBalance: 0,
+      defaultOutgoingChequeAmt: 0,
       KHAHC: 0,
       GAA: 0,
       COAA: 0,

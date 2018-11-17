@@ -3,8 +3,7 @@ import add from '../utils/add';
 
 export default DS.Model.extend({
   date: DS.attr('string'),
-  local: DS.attr('number'),
-  worldwide: DS.attr('number'),
+  forLastMeeting: DS.attr('string'),
   cash: DS.attr('number'),
   cheques: DS.attr('number'),
   total: add('cash', 'cheques')

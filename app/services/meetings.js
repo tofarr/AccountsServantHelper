@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { inject } from '@ember/service';
 import Meeting from '../models/meeting';
 import moment from 'moment';
+import RSVP from 'rsvp';
 
 export default Service.extend({
 
@@ -22,7 +23,21 @@ export default Service.extend({
     };
   },
 
+  isValid(meeting){
+    if (meeting.cash < 0 || meeting.cheques < 0 || meeting.local < 0 || meeting.worldwide < 0){
+      return false;
+    }
+    let count1 = meeting.cash + meeting.cheques;
+    let count2 = meeting.local + meeting.worldwide;
+    return meeting.date && count1 && (count1 == count2);
+  },
+
   create(meeting){
+    if(!this.isValid(meeting)){
+      return new RSVP.Promise((resolve, reject) => {
+        reject('Invalid Meeting');
+      });
+    }
     let record = this.get('store').createRecord('meeting', meeting);
     return record.save();
   },

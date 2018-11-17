@@ -1,0 +1,26 @@
+<table class="meetings-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Local</th>
+      <th>Worldwide</th>
+      <th>Cash</th>
+      <th>Cheques</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each sortedList as |meeting|}}
+      <tr>
+        <td class="meeting-date">{{meeting.date}}</td>
+        <td class="meeting-local">{{money meeting.local}}</td>
+        <td class="meeting-worldwide">{{money meeting.worldwide}}</td>
+        <td class="meeting-cash">{{money meeting.cash}}</td>
+        <td class="meeting-cheques">{{money meeting.cheques}}</td>
+        <td>
+          <button class="delete" {{action "destroy" meeting}}>Delete</button>
+        </td>
+      </tr>
+    {{/each}}
+</tbody>
+</table>

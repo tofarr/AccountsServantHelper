@@ -1,12 +1,10 @@
 import Controller from '@ember/controller';
 import { inject } from '@ember/service';
-import { sort } from '@ember/object/computed';
+
 
 export default Controller.extend({
 
   meetings: inject('meetings'),
-  entriesSorting: ['date:desc'],
-  sortedList: sort('model.list', 'entriesSorting'),
   toast: inject('toast'),
 
   actions: {

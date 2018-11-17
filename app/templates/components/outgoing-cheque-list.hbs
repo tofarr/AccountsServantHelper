@@ -1,0 +1,30 @@
+<table class="outgoing-cheques-table">
+  <thead>
+    <tr>
+      <th>Issue Date</th>
+      <th>Processed Date</th>
+      <th>Cheque Id</th>
+      <th>Notes</th>
+      <th>Value</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each sortedList as |outgoingCheque|}}
+      <tr>
+        <td class="outgoing-cheque-issueDate">{{outgoingCheque.issueDate}}</td>
+        <td class="outgoing-cheque-processedDate">
+          {{pikaday-input value=(readonly outgoingCheque.processedDate) onSelection=(action "setProcessedDate" outgoingCheque) format="YYYY-MM-DD"}}
+          {{outgoingCheque.processedDate}}
+        </td>
+        <td class="outgoing-cheque-chequeId">{{outgoingCheque.chequeId}}</td>
+        <td class="outgoing-cheque-notes">{{outgoingCheque.notes}}</td>
+        <td class="outgoing-cheque-value">{{money outgoingCheque.value}}</td>
+        <td>
+          <button class="update" {{action "update" outgoingCheque}}>Update</button>
+          <button class="delete" {{action "remove" outgoingCheque}}>Delete</button>
+        </td>
+      </tr>
+    {{/each}}
+</tbody>
+</table>

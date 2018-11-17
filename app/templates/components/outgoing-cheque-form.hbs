@@ -1,0 +1,11 @@
+<fieldset>
+  <legend>{{title}}</legend>
+  {{date-field title="Issue Date" value=model.issueDate}}
+  {{date-field title="Processed Date" value=model.processedDate}}
+  {{text-field title="Cheque Id" value=model.chequeId}}
+  {{text-field title="Notes" value=model.notes}}
+  {{money-field title="Value" value=model.value}}
+  <div class="submit">
+    <button type="submit">{{submitText}}</button>
+  </div>
+</fieldset>

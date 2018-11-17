@@ -13,7 +13,7 @@ export default Component.extend({
 
   actions: {
     setValueDate(value){
-      this.set('value', moment(value).format('YYYY-MM-DD'));
+      this.set('value', value ? moment(value).format('YYYY-MM-DD') : null);
     }
   }
 });

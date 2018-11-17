@@ -1,0 +1,11 @@
+<fieldset>
+  <legend>{{title}}</legend>
+  {{date-field value=model.date}}
+  {{number-field title="Local" value=model.local}}
+  {{number-field title="Worldwide" value=model.worldwide}}
+  {{number-field title="Cash" value=model.cash}}
+  {{number-field title="Cheques" value=model.cheques}}
+  <div class="submit">
+    <button type="submit">{{submitText}}</button>
+  </div>
+</fieldset>

@@ -48,5 +48,42 @@ export default Service.extend({
   remove(record){
     record.deleteRecord();
     return record.save();
+  },
+
+  overview(startDate, endDate){
+    return new RSVP.Promise((resolve, reject) => {
+      this.list().then((deposits) => {
+        var ret = {
+          cashOpening: 0,
+          cash: 0,
+          cashClosing: 0,
+          chequesOpening: 0,
+          cheques: 0,
+          chequesClosing: 0,
+          totalOpening: 0,
+          total: 0,
+          totalClosing: 0,
+          results: []
+        }
+        deposits.forEach((deposit) => {
+          let date = deposit.get('forLastMeeting');
+          if(date < startDate){
+            ret.cashOpening += deposit.get('cash');
+            ret.chequesOpening += deposit.get('cheques');
+          }else if(date < endDate){
+            ret.cash += deposit.get('cash');
+            ret.cheques += deposit.get('cheques');
+            ret.results.push(deposit)
+          }
+        });
+        ret.results.sortBy('forLastMeeting');
+        ret.cashClosing = ret.cashOpening + ret.cash;
+        ret.chequesClosing = ret.chequesOpening + ret.cheques;
+        ret.totalOpening = ret.cashOpening + ret.chequesOpening;
+        ret.total = ret.cash + ret.cheques;
+        ret.totalClosing = ret.cashClosing + ret.chequesClosing;
+        resolve(ret);
+      }, reject);
+    });
   }
 });

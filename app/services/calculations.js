@@ -5,6 +5,7 @@ import add from '../utils/add';
 
 export default Service.extend({
   store: inject('store'),
+  settings: inject('settings'),
 
   recieptsBalance(){
     return new RSVP.Promise((resolve, reject) => {
@@ -81,5 +82,25 @@ export default Service.extend({
         resolve(firstMeeting);
       }, reject);
     })
+  },
+
+  expectedMeetings(month){
+    return new RSVP.Promise((resolve, reject) => {
+      this.get('settings').read().then((settings) => {
+        var expectedMeetingDates = [];
+        var now = moment(month, 'YYYY-MM').startOf('month');
+        let midweekMeetingDay = settings.midweekMeetingDay;
+        let watchtowerMeetingDay = settings.watchtowerMeetingDay;
+        let m = now.month();
+        while(now.month() == m){
+          let day = now.day();
+          if(day == midweekMeetingDay || day == watchtowerMeetingDay){
+            expectedMeetingDates.push(now.format('YYYY-MM-DD'));
+          }
+          now.add(1, 'days');
+        }
+        resolve(expectedMeetingDates);
+      }, reject);
+    });
   }
 });

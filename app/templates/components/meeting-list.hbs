@@ -1,11 +1,11 @@
-<table class="meetings-table">
+<table class="meetings-table" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
       <th>Date</th>
-      <th>Local</th>
-      <th>Worldwide</th>
-      <th>Cash</th>
-      <th>Cheques</th>
+      <th class="not-mobile">Local</th>
+      <th class="not-mobile">Worldwide</th>
+      <th class="not-mobile">Cash</th>
+      <th class="not-mobile">Cheques</th>
       <th>Total</th>
       <th>&nbsp;</th>
     </tr>
@@ -14,12 +14,13 @@
     {{#each sortedList as |meeting|}}
       <tr>
         <td class="meeting-date">{{meeting.date}}</td>
-        <td class="meeting-local">{{money meeting.local}}</td>
-        <td class="meeting-worldwide">{{money meeting.worldwide}}</td>
-        <td class="meeting-cash">{{money meeting.cash}}</td>
-        <td class="meeting-cheques">{{money meeting.cheques}}</td>
-        <td class="meeting-total">{{money meeting.total}}</td>
-        <td>
+        <td class="meeting-local money not-mobile">{{money meeting.local}}</td>
+        <td class="meeting-worldwide money not-mobile">{{money meeting.worldwide}}</td>
+        <td class="meeting-cash money not-mobile">{{money meeting.cash}}</td>
+        <td class="meeting-cheques money not-mobile">{{money meeting.cheques}}</td>
+        <td class="meeting-total money">{{money meeting.total}}</td>
+        <td class="actions">
+          <button class="details" {{action "remove" meeting}}>Details</button>
           <button class="delete" {{action "remove" meeting}}>Delete</button>
         </td>
       </tr>

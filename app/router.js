@@ -18,6 +18,7 @@ Router.map(function() {
   this.route('s26-list');
   this.route('s30-list');
   this.route('interests');
+  this.route('interest-payments');
 });
 
 export default Router;

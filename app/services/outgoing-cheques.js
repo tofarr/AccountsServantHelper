@@ -29,7 +29,7 @@ export default Service.extend({
   isValid(outgoingCheque){
     let processedDate = Ember.get(outgoingCheque, 'processedDate');
     let issueDate = Ember.get(outgoingCheque, 'issueDate');
-    if(!(Ember.get(outgoingCheque, 'value') > 0) || (!issueDate) || (!Ember.get(outgoingCheque,'chequeId'))) {
+    if(!(Ember.get(outgoingCheque, 'value') > 0) || (!issueDate) || (!Ember.get(outgoingCheque, 'chequeId')) || (!Ember.get(outgoingCheque, 'notes'))) {
       return false;
     }
     if((processedDate) && (processedDate < issueDate)){
@@ -60,5 +60,30 @@ export default Service.extend({
   remove(record){
     record.deleteRecord();
     return record.save();
+  },
+
+  overview(startDate, endDate){
+    return new RSVP.Promise((resolve, reject) => {
+      this.list().then((outgoingCheques) => {
+        var ret = {
+          opening: 0,
+          value: 0,
+          closing: 0,
+          results: []
+        }
+        outgoingCheques.forEach((outgoingCheque) => {
+          let date = outgoingCheque.get('issueDate');
+          if(date < startDate){
+            ret.opening += outgoingCheque.get('value');
+          }else if(date < endDate){
+            ret.value += outgoingCheque.get('value');
+            ret.results.push(outgoingCheque)
+          }
+        });
+        ret.results.sortBy('issueDate');
+        ret.closing = ret.opening + ret.value;
+        resolve(ret);
+      }, reject);
+    });
   }
 });

@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
 import { inject } from '@ember/service';
-import { computed } from '@ember/object';
 
 export default Controller.extend({
 
@@ -16,13 +15,13 @@ export default Controller.extend({
     return 'position:relative;top:0;left:0;width:'+width+'px;height:'+height+'px;transform:matrix('+scale+', 0, 0, '+scale+', '+tx+', '+ty+');';
   }),
 
-  actions: {
-    print(){
-      this.set("width.width", 1700);
-      Ember.run.later(()=>{
-        window.print();
-        this.get("width").onResize();
-      });
+    actions: {
+      print(){
+        this.set("width.width", 1700);
+        Ember.run.later(()=>{
+          window.print();
+          this.get("width").onResize();
+        });
+      }
     }
-  }
 });

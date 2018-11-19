@@ -1,0 +1,20 @@
+<table class="outgoing-cheques-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Value</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each sortedList as |outgoingCheque|}}
+      <tr>
+        <td class="outgoing-cheque-processedDate">{{outgoingCheque.date}}</td>
+        <td class="outgoing-cheque-value">{{money outgoingCheque.value}}</td>
+        <td>
+          <button class="delete" {{action "remove" outgoingCheque}}>Delete</button>
+        </td>
+      </tr>
+    {{/each}}
+</tbody>
+</table>

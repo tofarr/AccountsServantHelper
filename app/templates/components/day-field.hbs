@@ -1,0 +1,10 @@
+<span class="label">{{title}}</span>
+<select>
+  {{#each days as |day|}}
+    {{#if (eq value day.value)}}
+      <option value="{{day.value}}" selected="true">{{day.title}}</option>
+    {{else}}
+      <option value="{{day.value}}">{{day.title}}</option>
+    {{/if}}
+  {{/each}}
+</select>

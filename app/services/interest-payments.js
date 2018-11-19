@@ -8,31 +8,39 @@ export default Service.extend({
   store: inject('store'),
 
   list(){
-    return this.get('store').findAll('incoming-transfer');
+    return this.get('store').findAll('interest-payment');
   },
 
   newInstance(){
     return new RSVP.Promise((resolve, reject) => {
       resolve({
         date: moment().format('YYYY-MM-DD'),
-        transferId: null,
         value: 0
       });
     });
   },
 
-  isValid(incomingTransfer){
-    return incomingTransfer.date && (incomingTransfer.value > 0);
+  isValid(interestPayment){
+    return interestPayment.date && (interestPayment.value > 0);
   },
 
-  create(incomingTransfer){
-    if(!this.isValid(incomingTransfer)){
+  create(interestPayment){
+    if(!this.isValid(interestPayment)){
       return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid Incoming Transfer');
+        reject('Invalid Interest Payment');
       });
     }
-    let record = this.get('store').createRecord('incoming-transfer', incomingTransfer);
+    let record = this.get('store').createRecord('interest-payment', interestPayment);
     return record.save();
+  },
+
+  update(interestPayment){
+    if(!this.isValid(interestPayment)){
+      return new RSVP.Promise((resolve, reject) => {
+        reject('Invalid Interest Payment');
+      });
+    }
+    return interestPayment.save();
   },
 
   remove(record){
@@ -42,20 +50,20 @@ export default Service.extend({
 
   overview(startDate, endDate){
     return new RSVP.Promise((resolve, reject) => {
-      this.list().then((transfers) => {
+      this.list().then((interestPayments) => {
         var ret = {
           opening: 0,
           value: 0,
           closing: 0,
           results: []
         }
-        transfers.forEach((transfer) => {
-          let date = transfer.get('date');
+        interestPayments.forEach((interestPayment) => {
+          let date = interestPayment.get('date');
           if(date < startDate){
-            ret.opening += transfer.get('value');
+            ret.opening += interestPayment.get('value');
           }else if(date < endDate){
-            ret.value += transfer.get('value');
-            ret.results.push(transfer)
+            ret.value += interestPayment.get('value');
+            ret.results.push(interestPayment)
           }
         });
         ret.results.sortBy('date');

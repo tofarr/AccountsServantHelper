@@ -1,1 +1,5 @@
-{{outlet}}
+<ul>
+{{#each model.months as |month|}}
+  {{#link-to "s30" (query-params month=month)}}<li>{{month}}</li>{{/link-to}}
+{{/each}}
+</ul>

@@ -1,6 +1,11 @@
 
 html,body,div{
   box-sizing: border-box;
+  font-family: Arial;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
 }
 
 .s26-input,.s26-head-field,.s26-field,.s26-row{
@@ -22,4 +27,136 @@ html,body,div{
 .s26-row .s26-input{
   line-height: 33px;
 }
-.
+
+.s30-field{
+  position: absolute;
+  font-size: 24px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.warning{
+  color: #4a6da7;
+  border: 2px solid #4a6da7;
+  border-radius: 5px;
+  margin-bottom: 44px;
+  padding: 10px 30px;
+}
+
+@media print {
+  .main-menu,.warning{
+    display: none;
+  }
+}
+
+form{
+  padding: 10px;
+}
+
+fieldset{
+  border: 2px solid #4a6da7;
+  border-radius: 5px;
+}
+
+legend{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.field{
+  display: flex;
+  flex-direction: row;
+  padding: 5px 0;
+}
+
+.field .label{
+  width: 50%;
+  line-height: 30px;
+}
+
+input,select{
+  width: 50%;
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 5px;
+  border: 1px solid #4a6da7;
+  border-radius: 3px;
+  box-sizing: border-box;
+  background: #FFF;
+}
+
+input:focus,select:focus{
+  border-color: #080;
+}
+
+button{
+  background: #4a6da7;
+  color: #FFF;
+  font-size: 18px;
+  width: 300px;
+  height: 30px;
+  line-height: 30px;
+  border: none;
+  margin: 10px 0;
+}
+
+.money-field input{
+  text-align: right;
+}
+
+.total-field .value{
+  display: block;
+  flex-grow: 1;
+  line-height: 30px;
+  color: #4a6da7;
+  font-weight: bold;
+  text-align: right;
+  padding: 0 6px;
+}
+
+.field:nth-child(odd),tbody tr:nth-child(odd){
+  background: #F6F6F6;
+}
+
+table{
+  width: 100%;
+}
+th{
+  padding: 4px;
+  border-bottom: 2px solid #4a6da7;
+}
+td{
+  white-space: nowrap;
+  padding: 4px;
+}
+td.money,td.actions{
+  text-align: right;
+}
+
+td button{
+  margin: 0;
+  width: auto;
+}
+
+.list{
+  padding: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+
+  button{
+    width: 100%;
+  }
+
+  .not-mobile{
+    display: none;
+  }
+  /*.field{
+    flex-direction: column;
+  }
+
+  .label{
+    width: 100%;
+  }*/
+}

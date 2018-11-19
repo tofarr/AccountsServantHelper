@@ -44,5 +44,42 @@ export default Service.extend({
   remove(record){
     record.deleteRecord();
     return record.save();
+  },
+
+  overview(startDate, endDate){
+    return new RSVP.Promise((resolve, reject) => {
+      this.list().then((meetings) => {
+        var ret = {
+          localOpening: 0,
+          local: 0,
+          localClosing: 0,
+          worldwideOpening: 0,
+          worldwide: 0,
+          worldwideClosing: 0,
+          totalOpening: 0,
+          total: 0,
+          totalClosing: 0,
+          results: []
+        }
+        meetings.forEach((meeting) => {
+          let date = meeting.get('date');
+          if(date < startDate){
+            ret.localOpening += meeting.get('local');
+            ret.worldwideOpening += meeting.get('worldwide');
+          }else if(date < endDate){
+            ret.local += meeting.get('local');
+            ret.worldwide += meeting.get('worldwide');
+            ret.results.push(meeting)
+          }
+        });
+        ret.results.sortBy('date');
+        ret.localClosing = ret.localOpening + ret.local;
+        ret.worldwideClosing = ret.worldwideOpening + ret.worldwide;
+        ret.totalOpening = ret.localOpening + ret.worldwideOpening;
+        ret.total = ret.local + ret.worldwide;
+        ret.totalClosing = ret.localClosing + ret.worldwideClosing;
+        resolve(ret);
+      }, reject);
+    });
   }
 });

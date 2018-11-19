@@ -1,1 +1,61 @@
-{{outlet}}
+<button {{action "print"}}>Print</button>
+
+<div class="s30-page-container" style="position:relative;top:0;left:0;width:1700px;height:2200px;">
+  <img src="/assets/images/S-30-1.png" style="position:absolute;width:1700px;height:2200px;top:0;left:0;" />
+  <div class="s30-page" style="position:absolute;top:0;left:0;width:1700px;height:2200px;">
+
+    <div class="s30-field" style="left:345px;top:310px;width:671px;text-align:center;">{{model.congregation}}</div>
+    <div class="s30-field" style="left:1203px;top:310px;width:349px;text-align:center;">{{model.month}} {{model.year}}</div>
+    <div class="s30-field" style="left:1352px;top:544px;width:160px;text-align:right;padding-right:10px;">{{money model.openingBalance}}</div>
+
+    <div class="s30-field" style="left:180px;top:718px;">
+      {{#each model.localIncomeItems as |item|}}
+        <div class="s30-field" style="position:static;display:flex;flex-direction:row;margin-bottom:14px;">
+          <div class="s30-field" style="position:static;width:592px;padding-left:10px;">{{item.title}}</div>
+          <div class="s30-field" style="position:static;width:166px;text-align:right;padding-right:10px;margin-left:62px;">{{money item.value}}</div>
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="s30-field" style="left:1084px;top:917px;width:160px;padding-right:10px;text-align:right;">{{money model.localIncome}}</div>
+
+    <div class="s30-field" style="left:180px;top:1063px;">
+      {{#each model.localExpenditureItems as |item|}}
+        <div class="s30-field" style="position:static;display:flex;flex-direction:row;margin-bottom:14px;">
+          <div class="s30-field" style="position:static;width:592px;padding-left:10px;">{{item.title}}</div>
+          <div class="s30-field" style="position:static;width:166px;text-align:right;padding-right:10px;margin-left:62px;">{{money item.value}}</div>
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="s30-field" style="left:1084px;top:1460px;width:160px;text-align:right;padding-right:10px;">{{money model.localExpenditure}}</div>
+
+    <div class="s30-field" style="left:1345px;top:1510px;width:166px;text-align:right;padding-right:10px;">{{money model.monthBalance}}</div>
+    <div class="s30-field" style="left:1345px;top:1560px;width:166px;text-align:right;padding-right:10px;">{{money model.closingBalance}}</div>
+
+    <div class="s30-field" style="left:1345px;top:1954px;width:166px;text-align:right;padding-right:10px;">{{money model.closingBalance}}</div>
+
+  </div>
+</div>
+
+<div class="s30-page-container" style="position:relative;top:0;left:0;width:1700px;height:2200px;">
+  <img src="/assets/images/S-30-2.png" style="position:absolute;width:1700px;height:2200px;top:0;left:0;" />
+  <div class="s30-page" style="position:absolute;top:0;left:0;width:1700px;height:2200px;">
+
+    <div class="s30-field" style="left:1354px;top:135px;width:154px;text-align:right;padding-right:10px;">{{money model.openingBalance}}</div>
+    <div class="s30-field" style="left:834px;top:267px;width:166px;text-align:right;padding-right:10px;">{{money model.localIncome}}</div>
+    <div class="s30-field" style="left:834px;top:367px;width:166px;text-align:right;padding-right:10px;">{{money model.worldwide}}</div>
+    <div class="s30-field" style="left:1080px;top:514px;width:166px;text-align:right;padding-right:10px;">{{money model.income}}</div>
+    <div class="s30-field" style="left:834px;top:652px;width:166px;text-align:right;padding-right:10px;">{{money model.localExpenditure}}</div>
+    <div class="s30-field" style="left:834px;top:758px;width:166px;text-align:right;padding-right:10px;">{{money model.worldwide}}</div>
+    <div class="s30-field" style="left:1086px;top:857px;width:148px;text-align:right;padding-right:10px;">{{money model.expenditure}}</div>
+    <div class="s30-field" style="left:1353px;top:1000px;width:160px;text-align:right;padding-right:10px;">{{model.closingBalance}}</div>
+    <div class="s30-field" style="left:1112px;top:1116px;width:440px;text-align:center;">{{model.accountsServantName}}</div>
+    <div class="s30-field" style="left:385px;top:1550px;width:197px;text-align:center;">{{model.month}}</div>
+    <div class="s30-field" style="left:1098px;top:1550px;width:197px;text-align:center;">{{money model.localIncome}}</div>
+    <div class="s30-field" style="left:599px;top:1632px;width:233px;text-align:center;">{{money model.localExpenditure}}</div>
+    <div class="s30-field" style="left:1304px;top:1632px;width:233px;text-align:center;">{{money model.closingBalance}}</div>
+    <div class="s30-field" style="left:153px;top:1798px;width:281px;text-align:center;">{{money model.worldwide}}</div>
+
+  </div>
+</div>

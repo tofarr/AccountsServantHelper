@@ -20,5 +20,18 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+
+  app.import('node_modules/dropbox/dist/Dropbox-sdk.js', {
+    using: [
+      { transformation: 'amd', as: 'dropbox' }
+    ]
+  });
+
+  app.import('node_modules/blueimp-md5/js/md5.js', {
+    using: [
+      { transformation: 'amd', as: 'md5' }
+    ]
+  });
+
   return app.toTree();
 };

@@ -5,6 +5,9 @@ const Storage = StorageObject.extend();
 Storage.reopenClass({
   initialState() {
     return {
+      dropboxToken: null,
+      dropboxSyncedAt: null,
+      dropboxState: null,
       openingBalance: 0,
       otherBalance: 0,
       congregation: null,

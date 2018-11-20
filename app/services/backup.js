@@ -24,6 +24,7 @@ export default Service.extend({
   },
 
   notifyDropboxTokenChange(){
+    console.log('Dropbox token changed...');
     let dropboxToken = this.get('settings.settings.dropboxToken');
     this.get('dropbox').set('dropboxToken', dropboxToken);
     if(dropboxToken){
@@ -64,7 +65,7 @@ export default Service.extend({
 
   notifyUnload(){
     console.log('Unloading...');
-    //this.write();
+    this.write();
   },
 
   write(){
@@ -81,7 +82,7 @@ export default Service.extend({
       }).then((hash) => {
         let content = JSON.stringify(hash);
         let state = md5(content);
-        if(this.get('settings.dropboxState') == state){
+        if(this.get('settings.settings.dropboxState') == state){
           console.log('No changes to write to dropbox.');
           return;
         }

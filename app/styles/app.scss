@@ -66,7 +66,7 @@ input:focus,select:focus{
   outline-color: #4a6da7;
 }
 
-button{
+.ember-view button{
   background: #4a6da7;
   color: #FFF;
   font-size: 18px;
@@ -167,6 +167,19 @@ a{
   margin: 14px 5px 0 0;
 }
 
+.toast-top-right{
+  top: 0;
+  right: 0;
+}
+
+.toast{
+  border-radius: 0;
+}
+
+.toast-info{
+  background-color: #4a6da7;
+}
+
 @media only screen and (min-width: 600px) {
   .mobile-only{
     display: none;
@@ -175,12 +188,14 @@ a{
     width: 300px;
     margin-left: 20px
   }
-
+  .toast{
+    border-bottom-left-radius: 5px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
 
-  button{
+  .ember-view button{
     width: 100%;
     line-height: 40px;
     height: 40px;
@@ -189,6 +204,23 @@ a{
   .not-mobile{
     display: none;
   }
+
+  #toast-container{
+    width: 100%;
+  }
+
+  #toast-container>div.toast{
+    width: 100%;
+    border-radius: 0;
+    line-height: 36px;
+    opacity: 1;
+  }
+
+  #toast-container .toast-close-button{
+    top: 0.3em;
+    right: 0;
+  }
+
 }
 
 @media print {

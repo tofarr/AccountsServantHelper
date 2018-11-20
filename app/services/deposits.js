@@ -26,13 +26,15 @@ export default Service.extend({
   },
 
   isValid(deposit){
-    if (deposit.cash < 0 || deposit.cheques < 0){
+    let cash = Ember.get(deposit,'cash');
+    let cheques = Ember.get(deposit,'cash');
+    if (cash < 0 || cheques < 0){
       return false;
     }
-    if(moment(deposit.date, 'YYYY-MM-DD').toDate().getTime() < moment(deposit.forLastMeeting, 'YYYY-MM-DD').toDate().getTime()){
+    if(moment(Ember.get(deposit,'date'), 'YYYY-MM-DD').toDate().getTime() < moment(Ember.get(deposit,'forLastMeeting'), 'YYYY-MM-DD').toDate().getTime()){
       return false
     }
-    return (deposit.cash || deposit.cheques);
+    return (cash || cheques);
   },
 
   create(deposit){

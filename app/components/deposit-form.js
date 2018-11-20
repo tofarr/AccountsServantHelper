@@ -15,6 +15,10 @@ export default Component.extend({
     return this.get('deposits').isValid(this.get('model'));
   }),
 
+  disabled: computed('submit', function(){
+    return !this.get('submit');
+  }),
+
   total: add('model.cash','model.cheques')
 
 });

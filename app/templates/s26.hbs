@@ -1,79 +1,68 @@
-<form>
-  <button {{action "print"}}>Print</button>
+<form class="print-form">
+  <button type="button" {{action "print"}}>Print</button>
   <ul class="warning">
     {{#each model.warnings as |warning|}}
       <li>{{warning}}</li>
     {{/each}}
   </ul>
 </form>
-<div class="s26-page-container" style="{{pageStyle}}">
-  <img src="/assets/images/S-26-1.png" style="position:absolute;width:1700px;height:2200px;top:0;left:0;" />
-  <div class="s26-page" style="position:absolute;top:0;left:0;width:1700px;height:2200px;">
-    <div class="s26-head-field congregation" style="left:53px;top:100px;width:528px;">{{model.congregation}}</div>
-    <div class="s26-head-field city" style="left:620px;top:100px;width:339px;">{{model.city}}</div>
-    <div class="s26-head-field state" style="left:998px;top:100px;width:213px;">{{model.state}}</div>
-    <div class="s26-head-field month" style="left:1250px;top:100px;width:237px;">{{model.month}}</div>
-    <div class="s26-head-field year" style="left:1526px;top:100px;width:121px;">{{model.year}}</div>
 
-    <div class="s26-rows" style="position:absolute;left:57px;top:287px;width:1586px;">
-      {{#each model.rows as |row|}}
-        <div class="s26-row" style="display:flex;flex-direction:row;height:32.222px;margin-bottom:1px;">
-          <div class="s26-input" style="width:63px;line-height:33px;text-align:center;">{{row.date}}</div>
-          <div class="s26-input" style="width:580px;margin-left:1px;padding-left:10px;">{{row.description}}</div>
-          <div class="s26-input" style="width:49px;margin-left:1px;text-align:center;">{{row.tc}}</div>
-          <div class="s26-input" style="width:148.5px;margin-left:1px;text-align:right;padding-right:25px;">{{money row.receiptsIn}}</div>
-          <div class="s26-input" style="width:148.5px;margin-left:1px;text-align:right;padding-right:25px;">{{money row.receiptsOut}}</div>
-          <div class="s26-input" style="width:148.5px;margin-left:1px;text-align:right;padding-right:25px;">{{money row.checkingAccountIn}}</div>
-          <div class="s26-input" style="width:148.5px;margin-left:1px;text-align:right;padding-right:25px;">{{money row.checkingAccountOut}}</div>
-        </div>
-        {{#each row.subRows as |subRow|}}
-          <div class="s26-row" style="display:flex;flex-direction:row;height:32.222px;margin-bottom:1px;">
-            <div class="s26-input" style="padding-left:93px;width:580px;margin-left:1px;">{{subRow}}</div>
-          </div>
-        {{/each}}
-      {{/each}}
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="s26-page1" viewBox="0 0 1700 2200">
+  <image width="1700" height="2200" xlink:href="/assets/images/S-26-1.png" />
 
-      <div style="position: absolute;left:694px;top:1727px;display:flex;flex-direction:row;height:63px;">
-        <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money model.receiptsIn}}</div>
-        <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money model.receiptsOut}}</div>
-        <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money model.checkingAccountIn}}</div>
-        <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money model.checkingAccountOut}}</div>
-      </div>
-    </div>
-  </div>
-</div>
+  <text x="317" y="138" text-anchor="middle" font-size="30">{{model.congregation}}</text>
+  <text x="789" y="138" text-anchor="middle" font-size="30">{{model.city}}</text>
+  <text x="1105" y="138" text-anchor="middle" font-size="30">{{model.state}}</text>
+  <text x="1369" y="138" text-anchor="middle" font-size="30">{{model.month}}</text>
+  <text x="1586" y="138" text-anchor="middle" font-size="30">{{model.year}}</text>
 
-<div class="s26-page-container" style="{{pageStyle}}">
-  <img src="/assets/images/S-26-2.png" style="position:absolute;width:1700px;height:2200px;top:0;left:0;" />
-  <div class="s26-page" style="position:absolute;top:0;left:0;width:1700px;height:2200px;">
+  {{#each model.rows as |row|}}
+    <text x="112" y="{{add 313 (mult row.index 33.2)}}" text-anchor="end" font-size="24">{{row.date}}</text>
+    <text x="124" y="{{add 313 (mult row.index 33.2)}}" text-anchor="start" font-size="24">{{row.description}}</text>
+    <text x="724" y="{{add 313 (mult row.index 33.2)}}" text-anchor="middle" font-size="24">{{row.tc}}</text>
+    <text x="880" y="{{add 313 (mult row.index 33.2)}}" text-anchor="end" font-size="24">{{money row.receiptsIn}}</text>
+    <text x="1030" y="{{add 313 (mult row.index 33.2)}}" text-anchor="end" font-size="24">{{money row.receiptsOut}}</text>
+    <text x="1179" y="{{add 313 (mult row.index 33.2)}}" text-anchor="end" font-size="24">{{money row.checkingAccountIn}}</text>
+    <text x="1328" y="{{add 313 (mult row.index 33.2)}}" text-anchor="end" font-size="24">{{money row.checkingAccountOut}}</text>
 
-    <div class="s26-row" style="position: absolute;left:752px;top:198px;display:flex;flex-direction:row;height:33px;">
-      <div class="s26-input" style="width:149px;margin-right:1px;line-height:33px;text-align:right;padding-right:23px;">{{money model.receiptsIn}}</div>
-      <div class="s26-input" style="width:149px;margin-right:1px;line-height:33px;text-align:right;padding-right:23px;">{{money model.receiptsOut}}</div>
-      <div class="s26-input" style="width:149px;margin-right:1px;line-height:33px;text-align:right;padding-right:23px;">{{money model.checkingAccountIn}}</div>
-      <div class="s26-input" style="width:149px;margin-right:1px;line-height:33px;text-align:right;padding-right:23px;">{{money model.checkingAccountOut}}</div>
-    </div>
+    {{#each row.subRows as |subRow index|}}
+      <text x="144" y="{{add 313 (mult (add 1 row.index index) 33.2)}}" text-anchor="start" font-size="24">{{subRow}}</text>
+    {{/each}}
+  {{/each}}
 
-    <div style="position: absolute;left:752px;top:963px;display:flex;flex-direction:row;height:63px;">
-      <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money model.receiptsIn}}</div>
-      <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money model.receiptsOut}}</div>
-      <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money model.checkingAccountIn}}</div>
-      <div class="s26-input" style="width:149px;margin-right:1px;line-height:63px;text-align:right;padding-right:23px;">{{money model.checkingAccountOut}}</div>
-    </div>
+  <text x="880" y="2058" text-anchor="end" font-size="24">{{money model.receiptsIn}}</text>
+  <text x="1030" y="2058" text-anchor="end" font-size="24">{{money model.receiptsOut}}</text>
+  <text x="1179" y="2058" text-anchor="end" font-size="24">{{money model.checkingAccountIn}}</text>
+  <text x="1328" y="2058" text-anchor="end" font-size="24">{{money model.checkingAccountOut}}</text>
+</svg>
 
-    <div class="s26-field" style="left:424px;top:1131px;width:393px;line-height:33px;padding-left:10px;text-align:center;">{{model.monthEnding}}</div>
-    <div class="s26-field" style="left:414px;top:1264px;width:153px;text-align:right;padding-right:10px;">{{money model.receiptsIn}}</div>
-    <div class="s26-field" style="left:414px;top:1297px;width:153px;text-align:right;padding-right:10px;">{{money model.receiptsOut}}</div>
-    <div class="s26-field" style="left:648px;top:1329px;width:169px;text-align:right;padding-right:10px;">{{money model.receiptsBalance}}</div>
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="s26-page2" viewBox="0 0 1700 2200">
+  <image width="1700" height="2200" xlink:href="/assets/images/S-26-2.png" />
 
-    <div class="s26-field" style="left:414px;top:1475px;width:153px;text-align:right;padding-right:10px;">{{money model.openingBalance}}</div>
-    <div class="s26-field" style="left:414px;top:1509px;width:153px;text-align:right;padding-right:10px;">{{money model.checkingAccountIn}}</div>
-    <div class="s26-field" style="left:414px;top:1541px;width:153px;text-align:right;padding-right:10px;">{{money model.checkingAccountOut}}</div>
-    <div class="s26-field" style="left:648px;top:1575px;width:169px;text-align:right;padding-right:10px;">{{money model.checkingAccountBalance}}</div>
+  <text x="880" y="224" text-anchor="end" font-size="24">{{money model.receiptsIn}}</text>
+  <text x="1030" y="224" text-anchor="end" font-size="24">{{money model.receiptsOut}}</text>
+  <text x="1179" y="224" text-anchor="end" font-size="24">{{money model.checkingAccountIn}}</text>
+  <text x="1328" y="224" text-anchor="end" font-size="24">{{money model.checkingAccountOut}}</text>
 
-    <div class="s26-field" style="left:414px;top:1721px;width:153px;text-align:right;padding-right:10px;">{{money model.otherBalance}}</div>
-    <div class="s26-field" style="left:648px;top:1819px;width:169px;text-align:right;padding-right:10px;">{{money model.otherBalance}}</div>
+  <text x="880" y="1004" text-anchor="end" font-size="24">{{money model.receiptsIn}}</text>
+  <text x="1030" y="1004" text-anchor="end" font-size="24">{{money model.receiptsOut}}</text>
+  <text x="1179" y="1004" text-anchor="end" font-size="24">{{money model.checkingAccountIn}}</text>
+  <text x="1328" y="1004" text-anchor="end" font-size="24">{{money model.checkingAccountOut}}</text>
 
-    <div class="s26-field" style="left:648px;top:1890px;width:169px;text-align:right;padding-right:10px;">{{money model.closingAccountBalance}}</div>
-  </div>
-</div>
+  <text x="621" y="1158" text-anchor="middle" font-size="24">{{model.monthEnding}}</text>
+
+  <text x="560" y="1291" text-anchor="end" font-size="24">{{money model.receiptsIn}}</text>
+  <text x="560" y="1324" text-anchor="end" font-size="24">{{money model.receiptsOut}}</text>
+  <text x="810" y="1356" text-anchor="end" font-size="24">{{money model.receiptsBalance}}</text>
+
+  <text x="560" y="1502" text-anchor="end" font-size="24">{{money model.openingBalance}}</text>
+  <text x="560" y="1536" text-anchor="end" font-size="24">{{money model.checkingAccountIn}}</text>
+  <text x="560" y="1568" text-anchor="end" font-size="24">{{money model.checkingAccountOut}}</text>
+  <text x="810" y="1602" text-anchor="end" font-size="24">{{money model.checkingAccountBalance}}</text>
+
+  <text x="560" y="1748" text-anchor="end" font-size="24">{{money model.otherBalance}}</text>
+  <text x="810" y="1846" text-anchor="end" font-size="24">{{money model.otherBalance}}</text>
+
+  <text x="810" y="1917" text-anchor="end" font-size="24">{{money model.closingAccountBalance}}</text>
+
+</svg>

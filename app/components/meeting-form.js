@@ -15,5 +15,9 @@ export default Component.extend({
     return this.get('meetings').isValid(this.get('model'));
   }),
 
+  disabled: computed('submit', function(){
+    return !this.get('submit');
+  }),
+
   total : add('model.local','model.worldwide')
 });

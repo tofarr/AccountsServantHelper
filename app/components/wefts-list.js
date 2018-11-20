@@ -6,6 +6,9 @@ export default Component.extend({
   sortedList: sort('list', 'entriesSorting'),
 
   actions: {
+    view(meeting){
+      this.set("viewItem", meeting);
+    },
     remove(wefts){
       this.get('remove')(wefts);
     }

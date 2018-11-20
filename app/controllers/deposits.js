@@ -19,6 +19,9 @@ export default Controller.extend({
     },
 
     remove(deposit){
+      if(!confirm('Are you sure?')){
+        return;
+      }
       this.get('deposits').remove(deposit)
       .then(() => {
         this.get('toast').info('Delete Successful');

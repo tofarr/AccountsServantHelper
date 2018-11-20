@@ -28,6 +28,9 @@ export default Controller.extend({
     },
 
     remove(outgoingCheque){
+      if(!confirm('Are you sure?')){
+        return;
+      }
       this.get('outgoingCheques').remove(outgoingCheque)
       .then(() => {
         this.get('toast').info('Delete Successful');

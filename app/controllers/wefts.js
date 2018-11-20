@@ -18,8 +18,11 @@ export default Controller.extend({
       });
     },
 
-    remove(incomingTransfer){
-      this.get('wefts').remove(incomingTransfer)
+    remove(wefts){
+      if(!confirm('Are you sure?')){
+        return;
+      }
+      this.get('wefts').remove(wefts)
       .then(() => {
         this.get('toast').info('Delete Successful');
       }, (error) => {

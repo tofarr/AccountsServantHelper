@@ -6,6 +6,9 @@ export default Component.extend({
   sortedList: sort('list', 'entriesSorting'),
 
   actions: {
+    view(deposit){
+      this.set("viewItem", deposit);
+    },
     remove(deposit){
       this.get('remove')(deposit);
     }

@@ -19,6 +19,9 @@ export default Controller.extend({
     },
 
     remove(meeting){
+      if(!confirm('Are you sure?')){
+        return;
+      }
       this.get('meetings').remove(meeting)
       .then(() => {
         this.get('toast').info('Delete Successful');

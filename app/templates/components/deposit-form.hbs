@@ -1,11 +1,13 @@
 <fieldset>
   <legend>{{title}}</legend>
-  {{date-field value=model.date}}
-  {{date-field title="Last Meeting Date" value=model.forLastMeeting}}
-  {{money-field title="Cash" value=model.cash}}
-  {{money-field title="Cheques" value=model.cheques}}
+  {{date-field value=model.date disabled=disabled}}
+  {{date-field title="Last Meeting Date" value=model.forLastMeeting disabled=disabled}}
+  {{money-field title="Cash" value=model.cash disabled=disabled}}
+  {{money-field title="Cheques" value=model.cheques disabled=disabled}}
   {{total-field value=total}}
-  <div class="submit">
-    <button type="submit">{{submitText}}</button>
-  </div>
+  {{#if submit}}
+    <div class="submit">
+      <button type="submit">{{submitText}}</button>
+    </div>
+  {{/if}}
 </fieldset>

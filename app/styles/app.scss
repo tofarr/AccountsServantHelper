@@ -1,3 +1,5 @@
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
 
 html,body,div{
   box-sizing: border-box;
@@ -6,26 +8,6 @@ html,body,div{
   padding: 0;
   margin: 0;
   font-size: 18px;
-}
-
-.s26-input,.s26-head-field,.s26-field,.s26-row{
-  font-size: 24px;
-}
-.s26-head-field{
-  position:absolute;
-  height:48px;
-  line-height:48px;
-  padding-left: 10px;
-  text-align: center;
-}
-.s26-field{
-  top: 0;
-  position:absolute;
-  height: 33px;
-  line-height: 33px;
-}
-.s26-row .s26-input{
-  line-height: 33px;
 }
 
 .s30-field{
@@ -41,12 +23,6 @@ html,body,div{
   border-radius: 5px;
   margin-bottom: 44px;
   padding: 10px 30px;
-}
-
-@media print {
-  .main-menu,.warning{
-    display: none;
-  }
 }
 
 form{
@@ -77,8 +53,8 @@ legend{
 input,select{
   width: 50%;
   font-size: 18px;
-  height: 30px;
-  line-height: 30px;
+  height: 40px;
+  line-height: 40px;
   padding: 0 5px;
   border: 1px solid #4a6da7;
   border-radius: 3px;
@@ -87,7 +63,7 @@ input,select{
 }
 
 input:focus,select:focus{
-  border-color: #080;
+  outline-color: #4a6da7;
 }
 
 button{
@@ -95,8 +71,8 @@ button{
   color: #FFF;
   font-size: 18px;
   width: 300px;
-  height: 30px;
-  line-height: 30px;
+  height: 40px;
+  line-height: 40px;
   border: none;
   margin: 10px 0;
 }
@@ -108,7 +84,7 @@ button{
 .total-field .value{
   display: block;
   flex-grow: 1;
-  line-height: 30px;
+  line-height: 40px;
   color: #4a6da7;
   font-weight: bold;
   text-align: right;
@@ -143,20 +119,97 @@ td button{
   padding: 10px;
 }
 
+.popup-content{
+  width:300px;
+}
+
+form.popup-content{
+  padding: 10px 0;
+}
+
+.popup-content fieldset{
+  border: none;
+  padding: 0;
+}
+
+.unprocessed{
+  color: #888;
+}
+
+.main-menu a{
+  display: block;
+  padding: 0 30px;
+  height: 50px;
+  line-height: 50px;
+  text-decoration: none;
+  background: #4a6da7;
+  color: #FFF;
+  margin: 4px 4px;
+}
+
+a{
+  color: #4a6da7;
+}
+
+.home-button{
+  height: 60px;
+  line-height: 60px;
+  padding: 0 10px;
+  display: block;
+  text-decoration: none;
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+}
+.home-button img{
+  width: 32px;
+  height: 32px;
+  margin: 14px 5px 0 0;
+}
+
+@media only screen and (min-width: 600px) {
+  .mobile-only{
+    display: none;
+  }
+  .main-menu a{
+    width: 300px;
+    margin-left: 20px
+  }
+
+}
+
 @media only screen and (max-width: 600px) {
 
   button{
     width: 100%;
+    line-height: 40px;
+    height: 40px;
   }
 
   .not-mobile{
     display: none;
   }
-  /*.field{
-    flex-direction: column;
-  }
+}
 
-  .label{
-    width: 100%;
-  }*/
+@media print {
+  @page {
+    //size: A4 portrait;
+    margin: 0;
+  }
+  .main-menu,.warning,.home-button,.print-form{
+    display: none;
+    visibility: hidden;
+  }
+  .s26-page1{
+    page-break-before: avoid;
+    page-break-inside: avoid;
+  }
+  .s26-page2{
+    page-break-before: always;
+    page-break-inside: avoid;
+  }
+  .s30-page-container{
+    page-break-before: always;
+    page-break-inside: avoid;
+  }
 }

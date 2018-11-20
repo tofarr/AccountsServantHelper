@@ -13,17 +13,23 @@
   <tbody>
     {{#each sortedList as |meeting|}}
       <tr>
-        <td class="meeting-date">{{meeting.date}}</td>
-        <td class="meeting-local money not-mobile">{{money meeting.local}}</td>
-        <td class="meeting-worldwide money not-mobile">{{money meeting.worldwide}}</td>
-        <td class="meeting-cash money not-mobile">{{money meeting.cash}}</td>
-        <td class="meeting-cheques money not-mobile">{{money meeting.cheques}}</td>
-        <td class="meeting-total money">{{money meeting.total}}</td>
+        <td>{{meeting.date}}</td>
+        <td class="money not-mobile">{{money meeting.local}}</td>
+        <td class="money not-mobile">{{money meeting.worldwide}}</td>
+        <td class="money not-mobile">{{money meeting.cash}}</td>
+        <td class="money not-mobile">{{money meeting.cheques}}</td>
+        <td class="money">{{money meeting.total}}</td>
         <td class="actions">
-          <button class="details" {{action "remove" meeting}}>Details</button>
+          <button class="view mobile-only" {{action "view" meeting}}>View</button>
           <button class="delete" {{action "remove" meeting}}>Delete</button>
         </td>
       </tr>
     {{/each}}
 </tbody>
 </table>
+
+{{#if viewItem}}
+  {{#modal-dialog hasOverlay=true translucentOverlay=true onClickOverlay=(action toggleProperty "viewItem")}}
+    {{meeting-form model=viewItem class="popup-content" title="Meeting Details"}}
+  {{/modal-dialog}}
+{{/if}}

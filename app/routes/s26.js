@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import { inject } from '@ember/service';
 import RSVP from 'rsvp';
 import moment from 'moment';
+import money from '../utils/money';
 
 export default Route.extend({
 
@@ -69,7 +70,13 @@ export default Route.extend({
     this.addIncomingTransferRows(incomingTransfers, rows);
     this.addOutgoingChequeRows(outgoingCheques, rows);
     this.addInterestPaymentRows(interestPayments, rows);
+    rows.sort((a, b) => {return a.date - b.date;}); // sort before wefts - wefts should be at end
     this.addWeftsRows(wefts, rows);
+    var index = 0;
+    rows.forEach((row) => {
+      row.index = index;
+      index += 1 + (row.subRows ? row.subRows.length : 0);
+    });
     return rows;
   },
 
@@ -145,11 +152,11 @@ export default Route.extend({
         description: 'WEFTS ('+weft.get('transferId')+')',
         checkingAccountOut: weft.get('total'),
         subRows: [
-          'Contributions - WW ' + weft.get('worldwide'),
-          'KHAHC ' + weft.get('khahc'),
-          'GAA ' + weft.get('gaa'),
-          'COAA ' + weft.get('coaa'),
-          'CT ' + weft.get('ct'),
+          'Contributions - WW ' + money(weft.get('worldwide')),
+          'KHAHC ' + money(weft.get('khahc')),
+          'GAA ' + money(weft.get('gaa')),
+          'COAA ' + money(weft.get('coaa')),
+          'CT ' + money(weft.get('ct')),
         ]
       });
     });

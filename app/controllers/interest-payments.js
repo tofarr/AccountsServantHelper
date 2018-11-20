@@ -28,6 +28,9 @@ export default Controller.extend({
     },
 
     remove(interestPayment){
+      if(!confirm('Are you sure?')){
+        return;
+      }
       this.get('interestPayments').remove(interestPayment)
       .then(() => {
         this.get('toast').info('Delete Successful');

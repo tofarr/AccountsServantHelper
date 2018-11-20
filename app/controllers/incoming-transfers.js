@@ -19,6 +19,9 @@ export default Controller.extend({
     },
 
     remove(incomingTransfer){
+      if(!confirm('Are you sure?')){
+        return;
+      }
       this.get('incomingTransfers').remove(incomingTransfer)
       .then(() => {
         this.get('toast').info('Delete Successful');

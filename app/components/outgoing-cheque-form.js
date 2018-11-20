@@ -12,6 +12,10 @@ export default Component.extend({
 
   valid: computed('model.{issueDate,processedDate,chequeId,value,notes}', function(){
     return this.get('outgoingCheques').isValid(this.get('model'));
+  }),
+
+  disabled: computed('submit', function(){
+    return !this.get('submit');
   })
 
 });

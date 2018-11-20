@@ -15,6 +15,10 @@ export default Component.extend({
     return this.get('wefts').isValid(this.get('model'));
   }),
 
+  disabled: computed('submit', function(){
+    return !this.get('submit');
+  }),
+
   total: add('model.khahc', 'model.gaa', 'model.coaa', 'model.ct', 'model.worldwide')
-  
+
 });

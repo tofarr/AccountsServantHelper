@@ -15,20 +15,24 @@ export default Service.extend({
     // Why oh Why is there no way to link this to the object in ember? Looks like I will be learning react soon.
     return {
       date: moment().format('YYYY-MM-DD'),
-      local: 0,
-      worldwide: 0,
-      cash: 0,
-      cheques: 0
+      local: null,
+      worldwide: null,
+      cash: null,
+      cheques: null
     };
   },
 
   isValid(meeting){
-    if (meeting.cash < 0 || meeting.cheques < 0 || meeting.local < 0 || meeting.worldwide < 0){
+    let cash = Ember.get(meeting, 'cash');
+    let cheques = Ember.get(meeting, 'cheques');
+    let local = Ember.get(meeting, 'local');
+    let worldwide = Ember.get(meeting, 'worldwide');
+    if (cash < 0 || cheques < 0 || local < 0 || worldwide < 0){
       return false;
     }
-    let count1 = meeting.cash + meeting.cheques;
-    let count2 = meeting.local + meeting.worldwide;
-    return meeting.date && count1 && (count1 == count2);
+    let count1 = cash + cheques;
+    let count2 = local + worldwide;
+    return Ember.get(meeting, 'date') && count1 && (count1 == count2);
   },
 
   create(meeting){

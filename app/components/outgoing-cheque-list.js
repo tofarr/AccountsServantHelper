@@ -6,6 +6,9 @@ export default Component.extend({
   sortedList: sort('list', 'entriesSorting'),
 
   actions: {
+    view(outgoingCheque){
+      this.set("viewItem", outgoingCheque);
+    },
     update(outgoingCheque){
       this.get('update')(outgoingCheque);
     },

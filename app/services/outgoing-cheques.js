@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
+import { get } from '@ember/object';
 
 export default Service.extend({
 
@@ -27,9 +28,9 @@ export default Service.extend({
   },
 
   isValid(outgoingCheque){
-    let processedDate = Ember.get(outgoingCheque, 'processedDate');
-    let issueDate = Ember.get(outgoingCheque, 'issueDate');
-    if(!(Ember.get(outgoingCheque, 'value') > 0) || (!issueDate) || (!Ember.get(outgoingCheque, 'chequeId')) || (!Ember.get(outgoingCheque, 'notes'))) {
+    let processedDate = get(outgoingCheque, 'processedDate');
+    let issueDate = get(outgoingCheque, 'issueDate');
+    if(!(get(outgoingCheque, 'value') > 0) || (!issueDate) || (!get(outgoingCheque, 'chequeId')) || (!get(outgoingCheque, 'notes'))) {
       return false;
     }
     if((processedDate) && (processedDate < issueDate)){

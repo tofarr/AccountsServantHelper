@@ -1,3 +1,3 @@
 import crudController from '../utils/crud-controller';
 
-export default crudController('incoming-transfer');
+export default crudController('interest-payment');

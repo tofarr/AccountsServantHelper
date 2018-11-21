@@ -1,16 +1,9 @@
-import Service from '@ember/service';
-import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
 import { get } from '@ember/object';
+import crudService from '../utils/crud-service';
 
-export default Service.extend({
-
-  store: inject('store'),
-
-  list(){
-    return this.get('store').findAll('meeting');
-  },
+export default crudService('meeting').extend({
 
   newInstance(){
     // Why oh Why is there no way to link this to the object in ember? Looks like I will be learning react soon.
@@ -23,32 +16,27 @@ export default Service.extend({
     };
   },
 
-  isValid(meeting){
+  validate(meeting){
+    var ret = [];
     let cash = get(meeting, 'cash');
     let cheques = get(meeting, 'cheques');
     let local = get(meeting, 'local');
     let worldwide = get(meeting, 'worldwide');
     if (cash < 0 || cheques < 0 || local < 0 || worldwide < 0){
-      return false;
+      ret.push("All amounts must be greater than or equal to 0.");
     }
-    let count1 = cash + cheques;
-    let count2 = local + worldwide;
-    return get(meeting, 'date') && count1 && (count1 == count2);
-  },
-
-  create(meeting){
-    if(!this.isValid(meeting)){
-      return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid Meeting');
-      });
+    if(!get(meeting, 'date')){
+      ret.push("Meeting date should not be blank.");
     }
-    let record = this.get('store').createRecord('meeting', meeting);
-    return record.save();
-  },
-
-  remove(record){
-    record.deleteRecord();
-    return record.save();
+    let count1 = local + worldwide;
+    let count2 = cash + cheques;
+    if(!count1){
+      ret.push("Local and worldwide should be positive numbers.");
+    }
+    if(count1 != count2){
+      ret.push("Sum of Cash and Cheques should match Sum of Local and Worldwide");
+    }
+    return ret;
   },
 
   overview(startDate, endDate){

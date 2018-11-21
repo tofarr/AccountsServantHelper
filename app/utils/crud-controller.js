@@ -17,7 +17,13 @@ export default function crudController(type){
           this.get('toast').info('Save Successful');
         }, (error) => {
           console.error(error);
-          this.get('toast').error('Error Saving Changes');
+          if(error instanceof Array){
+            error.forEach((error) => {
+              this.get('toast').error(error);
+            })
+          }else{
+            this.get('toast').error('Error Saving Changes');
+          }
         });
       },
 
@@ -27,7 +33,13 @@ export default function crudController(type){
             this.get('toast').info('Update Successful');
           }, (error) => {
             console.error(error);
-            this.get('toast').error('Error Updating Record');
+            if(error instanceof Array){
+              error.forEach((error) => {
+                this.get('toast').error(error);
+              })
+            }else{
+              this.get('toast').error('Error Saving Changes');
+            }
           });
       },
 

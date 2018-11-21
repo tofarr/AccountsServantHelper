@@ -1,10 +1,6 @@
 <form class="print-form">
   <button type="button" {{action "print"}}>Print</button>
-  <ul class="warning">
-    {{#each model.warnings as |warning|}}
-      <li>{{warning}}</li>
-    {{/each}}
-  </ul>
+  {{warning-list warnings=model.warnings}}
 </form>
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="s26-page1" viewBox="0 0 1700 2200">

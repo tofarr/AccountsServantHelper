@@ -1,17 +1,13 @@
-import Service from '@ember/service';
 import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
 import { get } from '@ember/object';
+import crudService from '../utils/crud-service';
 
-export default Service.extend({
+export default crudService('outgoing-cheque').extend({
 
   store: inject('store'),
   settings: inject('settings'),
-
-  list(){
-    return this.get('store').findAll('outgoing-cheque');
-  },
 
   newInstance(){
     return new RSVP.Promise((resolve, reject) => {
@@ -27,40 +23,25 @@ export default Service.extend({
     });
   },
 
-  isValid(outgoingCheque){
+  validate(outgoingCheque){
+    var ret = [];
     let processedDate = get(outgoingCheque, 'processedDate');
     let issueDate = get(outgoingCheque, 'issueDate');
-    if(!(get(outgoingCheque, 'value') > 0) || (!issueDate) || (!get(outgoingCheque, 'chequeId')) || (!get(outgoingCheque, 'notes'))) {
-      return false;
+    if(!(get(outgoingCheque, 'value') > 0)){
+      ret.push('Value must be greater than 0');
     }
-    if((processedDate) && (processedDate < issueDate)){
-      return false;
+    if(!issueDate){
+      ret.push('Issue Date must not be blank');
+    }else if((processedDate) && (processedDate < issueDate)){
+      ret.push('Processed Date should be the same as or later than Issue Date! (How can you cash a cheque before it is written?)');
     }
-    return true;
-  },
-
-  create(outgoingCheque){
-    if(!this.isValid(outgoingCheque)){
-      return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid Outgoing Cheque');
-      });
+    if(!get(outgoingCheque, 'chequeId')){
+      ret.push('Cheque Id is required!');
     }
-    let record = this.get('store').createRecord('outgoing-cheque', outgoingCheque);
-    return record.save();
-  },
-
-  update(outgoingCheque){
-    if(!this.isValid(outgoingCheque)){
-      return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid Outgoing Cheque');
-      });
+    if(!get(outgoingCheque, 'notes')){
+      ret.push('Notes are required! (What was this cheque for?)');
     }
-    return outgoingCheque.save();
-  },
-
-  remove(record){
-    record.deleteRecord();
-    return record.save();
+    return ret;
   },
 
   overview(startDate, endDate){

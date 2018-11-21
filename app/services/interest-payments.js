@@ -1,15 +1,8 @@
-import Service from '@ember/service';
-import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
+import crudService from '../utils/crud-service';
 
-export default Service.extend({
-
-  store: inject('store'),
-
-  list(){
-    return this.get('store').findAll('interest-payment');
-  },
+export default crudService('interest-payment').extend({
 
   newInstance(){
     return new RSVP.Promise((resolve) => {
@@ -20,32 +13,15 @@ export default Service.extend({
     });
   },
 
-  isValid(interestPayment){
-    return interestPayment.date && (interestPayment.value > 0);
-  },
-
-  create(interestPayment){
-    if(!this.isValid(interestPayment)){
-      return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid Interest Payment');
-      });
+  validate(interestPayment){
+    var ret = [];
+    if(!interestPayment.date){
+      ret.push('Date is required');
     }
-    let record = this.get('store').createRecord('interest-payment', interestPayment);
-    return record.save();
-  },
-
-  update(interestPayment){
-    if(!this.isValid(interestPayment)){
-      return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid Interest Payment');
-      });
+    if(!(interestPayment.value)){
+      ret.push('Value must be greater than 0');
     }
-    return interestPayment.save();
-  },
-
-  remove(record){
-    record.deleteRecord();
-    return record.save();
+    return ret;
   },
 
   overview(startDate, endDate){

@@ -1,9 +1,9 @@
-import Service from '@ember/service';
 import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
+import crudService from '../utils/crud-service';
 
-export default Service.extend({
+export default crudService('weft').extend({
 
   store: inject('store'),
   settings: inject('settings'),
@@ -21,6 +21,7 @@ export default Service.extend({
             date: moment().format('YYYY-MM-DD'),
             forLastMeeting: balance.lastMeeting,
             transferId: null,
+            worldwideResolution: settings.get('worldwideResolution'),
             khahc: settings.get('khahc'),
             gaa: settings.get('gaa'),
             coaa: settings.get('coaa'),
@@ -32,29 +33,36 @@ export default Service.extend({
     });
   },
 
-  isValid(weft){
-    return weft.date
-      && weft.transferId
-      && (weft.khahc >= 0)
-      && (weft.gaa >= 0)
-      && (weft.coaa >= 0)
-      && (weft.ct >= 0)
-      && (weft.worldwide >= 0)
-  },
-
-  create(weft){
-    if(!this.isValid(weft)){
-      return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid WEFTS');
-      });
+  validate(weft){
+    let ret = [];
+    if(!weft.date){
+      ret.push('Date must not be blank!');
     }
-    let record = this.get('store').createRecord('weft', weft);
-    return record.save();
-  },
-
-  remove(record){
-    record.deleteRecord();
-    return record.save();
+    if(!weft.transferId){
+      ret.push('Transfer Id must not be blank!');
+    }
+    if(weft.worldwide < 0){
+      ret.push('Worldwide (Box) must be greater than or equal to 0');
+    }
+    if(weft.worldwideResolution < 0){
+      ret.push('Worldwide (Resolution) must be greater than or equal to 0');
+    }
+    if(weft.khahc < 0){
+      ret.push('KHAHC must be greater than or equal to 0');
+    }
+    if(weft.gaa < 0){
+      ret.push('GAA must be greater than or equal to 0');
+    }
+    if(weft.coaa < 0){
+      ret.push('COAA must be greater than or equal to 0');
+    }
+    if(weft.ct < 0){
+      ret.push('CT must be greater than or equal to 0');
+    }
+    if(!(weft.worldwide || weft.worldwideResolution || weft.khahc || weft.gaa || weft.coaa || weft.ct)){
+      ret.push('Total must be greater than 0!');
+    }
+    return ret;
   },
 
   overview(startDate, endDate){

@@ -5,7 +5,8 @@ import moment from 'moment';
 export default crudList('deposit').extend({
   entriesSorting: ['issueDate:desc'],
   actions: {
-    update(record){
+    update(record, event){
+      event.preventDefault()
       this.get('update')(record);
     },
     setProcessedDate(record, processedDate){

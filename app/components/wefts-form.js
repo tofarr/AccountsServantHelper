@@ -7,11 +7,11 @@ export default Component.extend({
   tagName: 'form',
   classNames: ['wefts-form'],
   classNameBindings: ['valid:valid:invalid'],
-  title: 'New Incoming Transfer',
+  title: 'New WEFTS Transfer',
   submitText: 'Save Changes',
   service: inject('wefts'),
 
-  valid: computed('model.{date,forLastMeeting,transferId,khahc,gaa,coaa,ct,worldwide}', function(){
+  valid: computed('model.{date,forLastMeeting,transferId,worldwideResolution,khahc,gaa,coaa,ct,worldwide}', function(){
     return this.get('service').isValid(this.get('model'));
   }),
 
@@ -19,6 +19,6 @@ export default Component.extend({
     return !this.get('submit');
   }),
 
-  total: add('model.khahc', 'model.gaa', 'model.coaa', 'model.ct', 'model.worldwide')
+  total: add('model.worldwideResolution', 'model.khahc', 'model.gaa', 'model.coaa', 'model.ct', 'model.worldwide')
 
 });

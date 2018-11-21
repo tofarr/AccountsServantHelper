@@ -1,15 +1,8 @@
-import Service from '@ember/service';
-import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
+import crudService from '../utils/crud-service';
 
-export default Service.extend({
-
-  store: inject('store'),
-
-  list(){
-    return this.get('store').findAll('incoming-transfer');
-  },
+export default crudService('incoming-transfer').extend({
 
   newInstance(){
     return new RSVP.Promise((resolve) => {
@@ -21,23 +14,15 @@ export default Service.extend({
     });
   },
 
-  isValid(incomingTransfer){
-    return incomingTransfer.date && (incomingTransfer.value > 0);
-  },
-
-  create(incomingTransfer){
-    if(!this.isValid(incomingTransfer)){
-      return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid Incoming Transfer');
-      });
+  validate(incomingTransfer){
+    var ret = [];
+    if(!incomingTransfer.date){
+      ret.push('Date is required');
     }
-    let record = this.get('store').createRecord('incoming-transfer', incomingTransfer);
-    return record.save();
-  },
-
-  remove(record){
-    record.deleteRecord();
-    return record.save();
+    if(!(incomingTransfer.value)){
+      ret.push('Value must be greater than 0');
+    }
+    return ret;
   },
 
   overview(startDate, endDate){

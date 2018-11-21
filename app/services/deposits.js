@@ -1,17 +1,12 @@
-import Service from '@ember/service';
 import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
 import { get } from '@ember/object';
+import crudService from '../utils/crud-service';
 
-export default Service.extend({
+export default crudService('deposit').extend({
 
-  store: inject('store'),
   calculations: inject('calculations'),
-
-  list(){
-    return this.get('store').findAll('deposit');
-  },
 
   newInstance(){
     return new RSVP.Promise((resolve, reject) => {
@@ -19,38 +14,27 @@ export default Service.extend({
         resolve({
           date: moment().format('YYYY-MM-DD'),
           forLastMeeting: balance.lastMeeting,
-          cash: balance.cash,
-          cheques: balance.cheques
+          cash: Math.max(0, balance.cash),
+          cheques: Math.max(0, balance.cheques)
         })
       }, reject);
     });
   },
 
-  isValid(deposit){
+  validate(deposit){
+    var ret = [];
     let cash = get(deposit,'cash');
     let cheques = get(deposit,'cash');
     if (cash < 0 || cheques < 0){
-      return false;
+      ret.push("Cash and Cheques must both be greater than or equal to 0.");
     }
     if(moment(get(deposit,'date'), 'YYYY-MM-DD').toDate().getTime() < moment(get(deposit,'forLastMeeting'), 'YYYY-MM-DD').toDate().getTime()){
-      return false
+      ret.push("Deposit date must be the same as or later than date of last meeting")
     }
-    return (cash || cheques);
-  },
-
-  create(deposit){
-    if(!this.isValid(deposit)){
-      return new RSVP.Promise((resolve, reject) => {
-        reject('Invalid Deposit');
-      });
+    if(!(cash || cheques)){
+      ret.push("A Cash or Cheque value is required")
     }
-    let record = this.get('store').createRecord('deposit', deposit);
-    return record.save();
-  },
-
-  remove(record){
-    record.deleteRecord();
-    return record.save();
+    return ret;
   },
 
   overview(startDate, endDate){

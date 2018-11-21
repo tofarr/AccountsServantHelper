@@ -16,11 +16,12 @@ Storage.reopenClass({
       midweekMeetingDay : 3,
       watchtowerMeetingDay: 0,
       accountsServantName: '',
-      defaultOutgoingChequeAmt: 55000,
-      khahc: 60000,
-      gaa: 7400,
-      coaa: 6500,
-      ct: 1800
+      defaultOutgoingChequeAmt: 0,
+      worldwideResolution: 0,
+      khahc: 0,
+      gaa: 0,
+      coaa: 0,
+      ct: 0
     };
   }
 });

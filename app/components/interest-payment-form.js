@@ -8,10 +8,13 @@ export default Component.extend({
   classNameBindings: ['valid:valid:invalid'],
   title: 'New Interest Payment',
   submitText: 'Save Changes',
-  interestPayments: inject('interest-payments'),
+  service: inject('interest-payments'),
 
   valid: computed('model.{issueDate,processedDate,chequeId,value,notes}', function(){
-    return this.get('interestPayments').isValid(this.get('model'));
-  })
+    return this.get('service').isValid(this.get('model'));
+  }),
 
+  disabled: computed('submit', function(){
+    return !this.get('submit');
+  })
 });

@@ -1,8 +1,11 @@
+/* eslint-disable no-console */
+/* eslint-disable ember/avoid-leaking-state-in-ember-objects */
 import Service from '@ember/service';
 import { inject } from '@ember/service';
 import moment from 'moment';
 import md5 from 'md5';
 import RSVP from 'rsvp';
+import { get } from '@ember/object';
 
 export default Service.extend({
 
@@ -31,7 +34,7 @@ export default Service.extend({
       this.read().then(() => {
         console.log('Backup read');
       },(error) => {
-        let responseText = Ember.get(error, 'response.statusText');
+        let responseText = get(error, 'response.statusText');
         if(responseText && responseText.startsWith('path/not_found/')){
           this.write();
         }else{

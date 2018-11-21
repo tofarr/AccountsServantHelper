@@ -1,11 +1,11 @@
-import money from 'kh-accounts/utils/money';
+import crudList from 'kh-accounts/utils/crud-list';
 import { module, test } from 'qunit';
 
-module('Unit | Utility | money', function() {
+module('Unit | Utility | crud-list', function(/*hooks*/) {
 
   // Replace this with your real tests.
   test('it works', function(assert) {
-    let result = money();
+    let result = crudList();
     assert.ok(result);
   });
 });

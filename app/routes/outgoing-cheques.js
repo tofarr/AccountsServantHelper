@@ -1,18 +1,3 @@
-import Route from '@ember/routing/route';
-import { inject } from '@ember/service';
-import RSVP from 'rsvp';
+import crudRoute from '../utils/crud-route';
 
-export default Route.extend({
-
-  outgoingCheques: inject('outgoing-cheques'),
-
-  model(){
-    let outgoingCheques = this.get('outgoingCheques');
-    return RSVP.hash({
-      newInstance: outgoingCheques.newInstance(),
-      list: outgoingCheques.list()
-    });
-  }
-
-
-});
+export default crudRoute('outgoing-cheque');

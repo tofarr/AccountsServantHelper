@@ -1,22 +1,15 @@
-import Component from '@ember/component';
-import { sort } from '@ember/object/computed';
+/* eslint-disable ember/avoid-leaking-state-in-ember-objects */
+import crudList from '../utils/crud-list';
+import moment from 'moment';
 
-export default Component.extend({
+export default crudList('deposit').extend({
   entriesSorting: ['issueDate:desc'],
-  sortedList: sort('list', 'entriesSorting'),
-
   actions: {
-    view(outgoingCheque){
-      this.set("viewItem", outgoingCheque);
+    update(record){
+      this.get('update')(record);
     },
-    update(outgoingCheque){
-      this.get('update')(outgoingCheque);
-    },
-    remove(outgoingCheque){
-      this.get('remove')(outgoingCheque);
-    },
-    setProcessedDate(outgoingCheque, processedDate){
-      outgoingCheque.set('processedDate', processedDate ? moment(processedDate).format('YYYY-MM-DD') : null);
+    setProcessedDate(record, processedDate){
+      record.set('processedDate', record ? moment(processedDate).format('YYYY-MM-DD') : null);
     }
   }
 });

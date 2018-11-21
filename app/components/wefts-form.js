@@ -9,10 +9,10 @@ export default Component.extend({
   classNameBindings: ['valid:valid:invalid'],
   title: 'New Incoming Transfer',
   submitText: 'Save Changes',
-  wefts: inject('wefts'),
+  service: inject('wefts'),
 
   valid: computed('model.{date,forLastMeeting,transferId,khahc,gaa,coaa,ct,worldwide}', function(){
-    return this.get('wefts').isValid(this.get('model'));
+    return this.get('service').isValid(this.get('model'));
   }),
 
   disabled: computed('submit', function(){

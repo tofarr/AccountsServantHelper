@@ -8,10 +8,13 @@ export default Component.extend({
   classNameBindings: ['valid:valid:invalid'],
   title: 'New Incoming Transfer',
   submitText: 'Save Changes',
-  incomingTransfers: inject('incoming-transfers'),
+  service: inject('incoming-transfers'),
 
   valid: computed('model.{date,transferId,value}', function(){
-    return this.get('incomingTransfers').isValid(this.get('model'));
-  })
+    return this.get('service').isValid(this.get('model'));
+  }),
 
+  disabled: computed('submit', function(){
+    return !this.get('submit');
+  })
 });

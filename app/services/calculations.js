@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { inject } from '@ember/service';
 import RSVP from 'rsvp';
 import add from '../utils/add';
+import moment from 'moment';
 
 export default Service.extend({
   store: inject('store'),
@@ -58,7 +59,7 @@ export default Service.extend({
         this.get('store').findAll('weft').then((wefts) => {
           wefts.forEach((weft) => {
             balance.value -= weft.get('worldwide');
-            if((!balance.lastWefts) || (balance.lastWefts < deposit.get('date'))){
+            if((!balance.lastWefts) || (balance.lastWefts < weft.get('date'))){
               balance.lastWefts = weft.get('date');
             }
           });

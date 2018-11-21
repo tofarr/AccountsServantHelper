@@ -218,6 +218,6 @@ export default Route.extend({
   },
 
   dateStr(date){
-    return date.substring(5,7)+date.substring(8);;
+    return date.substring(5,7) + date.substring(8);
   }
 });

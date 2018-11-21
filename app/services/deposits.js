@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
+import { get } from '@ember/object';
 
 export default Service.extend({
 
@@ -26,12 +27,12 @@ export default Service.extend({
   },
 
   isValid(deposit){
-    let cash = Ember.get(deposit,'cash');
-    let cheques = Ember.get(deposit,'cash');
+    let cash = get(deposit,'cash');
+    let cheques = get(deposit,'cash');
     if (cash < 0 || cheques < 0){
       return false;
     }
-    if(moment(Ember.get(deposit,'date'), 'YYYY-MM-DD').toDate().getTime() < moment(Ember.get(deposit,'forLastMeeting'), 'YYYY-MM-DD').toDate().getTime()){
+    if(moment(get(deposit,'date'), 'YYYY-MM-DD').toDate().getTime() < moment(get(deposit,'forLastMeeting'), 'YYYY-MM-DD').toDate().getTime()){
       return false
     }
     return (cash || cheques);

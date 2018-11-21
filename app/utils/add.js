@@ -1,4 +1,5 @@
 import { computed } from '@ember/object';
+import Ember from 'ember';
 
 export default function add() {
   let attrs = arguments;

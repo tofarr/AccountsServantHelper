@@ -3,11 +3,12 @@ import RSVP from 'rsvp';
 import dropbox from 'dropbox';
 import { computed } from '@ember/object';
 import { inject } from '@ember/service';
+import { alias } from '@ember/object/computed';
 
 export default Service.extend({
 
   settings: inject('settings'),
-  dropboxToken: Ember.computed.alias('settings.settings.dropboxToken'),
+  dropboxToken: alias('settings.settings.dropboxToken'),
   dropbox: computed('dropboxToken', function(){
     let dropboxToken = this.get('dropboxToken');
     return dropboxToken ? new dropbox.Dropbox({ accessToken: dropboxToken }) : null;
@@ -15,7 +16,6 @@ export default Service.extend({
 
   read(path){
     return new RSVP.Promise((resolve, reject) => {
-      debugger;
       let dropbox = this.get('dropbox');
       if(dropbox){
         dropbox.filesDownload({path: path}).then(function(response){

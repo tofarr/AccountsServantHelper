@@ -1,7 +1,7 @@
 import add from 'kh-accounts/utils/add';
 import { module, test } from 'qunit';
 
-module('Unit | Utility | add', function(hooks) {
+module('Unit | Utility | add', function() {
 
   // Replace this with your real tests.
   test('it works', function(assert) {

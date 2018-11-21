@@ -8,10 +8,10 @@ export default Component.extend({
   classNameBindings: ['valid:valid:invalid'],
   title: 'New Outgoing Cheque',
   submitText: 'Save Changes',
-  outgoingCheques: inject('outgoing-cheques'),
+  service: inject('outgoing-cheques'),
 
   valid: computed('model.{issueDate,processedDate,chequeId,value,notes}', function(){
-    return this.get('outgoingCheques').isValid(this.get('model'));
+    return this.get('service').isValid(this.get('model'));
   }),
 
   disabled: computed('submit', function(){

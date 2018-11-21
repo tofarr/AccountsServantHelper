@@ -9,10 +9,10 @@ export default Component.extend({
   classNameBindings: ['valid:valid:invalid'],
   title: 'New Deposit',
   submitText: 'Save Changes',
-  deposits: inject('deposits'),
+  service: inject('deposits'),
 
   valid: computed('model.{date,forLastMeeting,cash,cheques}', function(){
-    return this.get('deposits').isValid(this.get('model'));
+    return this.get('service').isValid(this.get('model'));
   }),
 
   disabled: computed('submit', function(){

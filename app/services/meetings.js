@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { inject } from '@ember/service';
 import moment from 'moment';
 import RSVP from 'rsvp';
+import { get } from '@ember/object';
 
 export default Service.extend({
 
@@ -23,16 +24,16 @@ export default Service.extend({
   },
 
   isValid(meeting){
-    let cash = Ember.get(meeting, 'cash');
-    let cheques = Ember.get(meeting, 'cheques');
-    let local = Ember.get(meeting, 'local');
-    let worldwide = Ember.get(meeting, 'worldwide');
+    let cash = get(meeting, 'cash');
+    let cheques = get(meeting, 'cheques');
+    let local = get(meeting, 'local');
+    let worldwide = get(meeting, 'worldwide');
     if (cash < 0 || cheques < 0 || local < 0 || worldwide < 0){
       return false;
     }
     let count1 = cash + cheques;
     let count2 = local + worldwide;
-    return Ember.get(meeting, 'date') && count1 && (count1 == count2);
+    return get(meeting, 'date') && count1 && (count1 == count2);
   },
 
   create(meeting){

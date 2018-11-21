@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Controller from '@ember/controller';
 import { inject } from '@ember/service';
 
@@ -12,6 +13,7 @@ export default Controller.extend({
       this.get('settings').update(this.get('model')).then(() => {
         this.get('toast').info('Save Successful');
       }, (error) => {
+        console.error(error);
         this.get('toast').error('Error Saving Changes');
       });
     }

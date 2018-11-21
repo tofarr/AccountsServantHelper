@@ -1,18 +1,3 @@
-import Route from '@ember/routing/route';
-import { inject } from '@ember/service';
-import RSVP from 'rsvp';
+import crudRoute from '../utils/crud-route';
 
-export default Route.extend({
-
-  wefts: inject('wefts'),
-
-  model(){
-    let wefts = this.get('wefts');
-    return RSVP.hash({
-      newInstance: wefts.newInstance(),
-      list: wefts.list()
-    });
-  }
-
-
-});
+export default crudRoute('weft');

@@ -12,7 +12,7 @@ export default Service.extend({
   },
 
   newInstance(){
-    return new RSVP.Promise((resolve, reject) => {
+    return new RSVP.Promise((resolve) => {
       resolve({
         date: moment().format('YYYY-MM-DD'),
         value: 0

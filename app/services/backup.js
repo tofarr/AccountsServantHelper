@@ -32,8 +32,8 @@ export default Service.extend({
   init(){
     this._super(...arguments);
     this.notifyDropboxTokenChange = this.notifyDropboxTokenChange.bind(this);
-    //this.get('storage').addObserver('dropboxToken', this.notifyDropboxTokenChange);
-    //window.addEventListener('beforeunload', this.notifyUnload.bind(this));
+    this.get('storage').addObserver('dropboxToken', this.notifyDropboxTokenChange);
+    window.addEventListener('beforeunload', this.notifyUnload.bind(this));
   },
 
   notifyDropboxTokenChange(){

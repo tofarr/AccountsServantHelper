@@ -50,17 +50,30 @@ export default crudService('deposit').extend({
           totalOpening: 0,
           total: 0,
           totalClosing: 0,
-          results: []
+          results: [],
+          notInOpening: [],
+          notInOpeningTotal: 0,
+          notInClosing: [],
+          notInClosingTotal: 0
         }
         deposits.forEach((deposit) => {
-          let date = deposit.get('forLastMeeting');
-          if(date < startDate){
+          let date = deposit.get('date');
+          let forLastMeeting = deposit.get('forLastMeeting');
+          if(forLastMeeting < startDate){
             ret.cashOpening += deposit.get('cash');
             ret.chequesOpening += deposit.get('cheques');
-          }else if(date < endDate){
+            if(date >= startDate && date < endDate){
+              ret.notInOpening.push(deposit);
+              ret.notInOpeningTotal += deposit.get('total');
+            }
+          }else if(forLastMeeting < endDate){
             ret.cash += deposit.get('cash');
             ret.cheques += deposit.get('cheques');
-            ret.results.push(deposit)
+            ret.results.push(deposit);
+            if(date > endDate){
+              ret.notInClosing.push(deposit);
+              ret.notInClosingTotal += deposit.get('total');
+            }
           }
         });
         ret.results.sortBy('forLastMeeting');

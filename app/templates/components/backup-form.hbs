@@ -1,0 +1,11 @@
+<fieldset>
+  <legend>{{title}}</legend>
+  {{text-field title="Dropbox Token" value=model.dropboxToken}}
+  {{text-field title="Last Sync" value=model.dropboxSyncedAt disabled=true}}
+
+  <div class="submit">
+    <button type="submit">{{submitText}}</button>
+    <button type="button" {{action "saveBackup"}}>Save to backup</button>
+    <button type="button" {{action "restoreFromBackup"}}>Restore from backup</button>
+  </div>
+</fieldset>

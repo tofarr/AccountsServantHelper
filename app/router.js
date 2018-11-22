@@ -15,10 +15,11 @@ Router.map(function() {
   this.route('s26');
   this.route('s30');
   this.route('settings');
-  this.route('s26-list');
-  this.route('s30-list');
-  this.route('interests');
   this.route('interest-payments');
+  this.route('dropbox');
+  this.route('backup');
+  this.route('reports');
+  this.route('statement');
 });
 
 export default Router;

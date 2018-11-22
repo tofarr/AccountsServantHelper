@@ -91,23 +91,36 @@ export default crudService('weft').extend({
           worldwideClosing: 0,
           totalClosing: 0,
 
-          results: []
+          results: [],
+          notInOpening: [],
+          notInOpeningTotal: 0,
+          notInClosing: [],
+          notInClosingTotal: 0
         }
         wefts.forEach((weft) => {
-          let date = weft.get('forLastMeeting');
-          if(date < startDate){
+          let date = weft.get('date');
+          let forLastMeeting = weft.get('forLastMeeting');
+          if(forLastMeeting < startDate){
             ret.khahcOpening += weft.get('khahc');
             ret.gaaOpening += weft.get('gaa');
             ret.coaaOpening += weft.get('coaa');
             ret.ctOpening += weft.get('ct');
             ret.worldwideOpening += weft.get('worldwide');
-          }else if(date < endDate){
+            if(date >= startDate && processedDate < endDate){
+              ret.notInOpening.push(weft);
+              ret.notInOpeningTotal += weft.get('total');
+            }
+          }else if(forLastMeeting < endDate){
             ret.khahc += weft.get('khahc');
             ret.gaa += weft.get('gaa');
             ret.coaa += weft.get('coaa');
             ret.ct += weft.get('ct');
             ret.worldwide += weft.get('worldwide');
-            ret.results.push(weft)
+            ret.results.push(weft);
+            if(date > endDate){
+              ret.notInClosing.push(weft);
+              ret.notInClosingTotal += weft.get('total');
+            }
           }
         });
         ret.results.sortBy('forLastMeeting');

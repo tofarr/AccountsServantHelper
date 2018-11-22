@@ -7,5 +7,6 @@ export default DS.Model.extend({
   worldwide: DS.attr('number'),
   cash: DS.attr('number'),
   cheques: DS.attr('number'),
-  total: add('cash', 'cheques')
+  total: add('cash', 'cheques'),
+  cancellation: DS.attr('string')
 });

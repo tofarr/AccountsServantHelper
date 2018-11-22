@@ -13,8 +13,15 @@ export default Component.extend({
   }),
 
   actions: {
-    setValueDate(value){
-      this.set('value', value ? moment(value).format('YYYY-MM-DD') : null);
+    valueChanged(){
+      debugger;
+    },
+
+    valueDateChanged(value){
+      this.setProperties({
+        value: value ? moment(value).format('YYYY-MM-DD') : null,
+        showPika: false
+      });
     }
   }
 });

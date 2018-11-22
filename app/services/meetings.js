@@ -1,6 +1,6 @@
 import moment from 'moment';
 import RSVP from 'rsvp';
-import { get } from '@ember/object';
+import { get, set } from '@ember/object';
 import crudService from '../utils/crud-service';
 
 export default crudService('meeting').extend({
@@ -30,13 +30,26 @@ export default crudService('meeting').extend({
     }
     let count1 = local + worldwide;
     let count2 = cash + cheques;
-    if(!count1){
-      ret.push("Local and worldwide should be positive numbers.");
-    }
     if(count1 != count2){
       ret.push("Sum of Cash and Cheques should match Sum of Local and Worldwide");
     }
+    if(get(meeting, 'cancellation')){
+      if(count1){
+        ret.push('No money is collected at cancelled meetings');
+      }
+    }else{
+      if(!count1){
+        ret.push("Local and worldwide should be positive numbers.");
+      }
+    }
     return ret;
+  },
+
+  sanitize(meeting){
+    set(meeting, 'local', get(meeting, 'local') || 0);
+    set(meeting, 'worldwide', get(meeting, 'worldwide') || 0);
+    set(meeting, 'cash', get(meeting, 'cash') || 0);
+    set(meeting, 'cheques', get(meeting, 'cheques') || 0);
   },
 
   overview(startDate, endDate){

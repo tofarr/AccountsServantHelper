@@ -1,2 +1,14 @@
 <span class="label">{{title}}</span>
-{{pikaday-input value=(readonly valueDate) onSelection=(action "setValueDate") format="YYYY-MM-DD" disabled=disabled}}
+<div class="date">
+  {{input value=(readonly value) onChange=(action "valueChanged") disabled=disabled class="date-text-field" style="flex-grow:1;"}}
+  {{#unless disabled}}
+    <button type="button" {{action toggleProperty "showPika"}}>
+      <img src="assets/images/calendar.png" title="Choose Date" />
+    </button>
+  {{/unless}}
+</div>
+{{#if showPika}}
+  {{#modal-dialog hasOverlay=true translucentOverlay=true onClickOverlay=(action toggleProperty "showPika")}}
+    {{pikaday-inputless value=(readonly valueDate) onSelection=(action "valueDateChanged") format="YYYY-MM-DD"}}
+  {{/modal-dialog}}
+{{/if}}

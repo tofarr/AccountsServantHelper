@@ -1,0 +1,77 @@
+
+<h2>{{model.month}}</h2>
+
+{{warning-list warnings=model.warnings}}
+
+<table class="crud-table overview-table" cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Account</th>
+      <th>Statement</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Opening Balance</td>
+      <td class="money">{{money model.openingBalance}}</td>
+      <td class="money">{{money model.openingStatement}}</td>
+    </tr>
+    <tr>
+      <td>Closing Balance</td>
+      <td class="money">{{money model.closingBalance}}</td>
+      <td class="money">{{money model.closingStatement}}</td>
+    </tr>
+  </tbody>
+</table>
+
+{{#if model.notInOpening.length}}
+  <h2>Not In Opening Balance</h2>
+
+  <table class="crud-table not-in-opening-table" cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Statement Date</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.notInOpening as |notIn|}}
+      <tr>
+        <td>{{notIn.type}}</td>
+        <td>{{notIn.date}}</td>
+        <td>{{notIn.statementDate}}</td>
+        <td>{{money notIn.value}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}
+
+
+{{#if model.notInClosing.length}}
+  <h2>Not In Closing Balance</h2>
+
+  <table class="crud-table not-in-opening-table" cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Statement Date</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.notInClosing as |notIn|}}
+      <tr>
+        <td>{{notIn.type}}</td>
+        <td>{{notIn.date}}</td>
+        <td>{{notIn.statementDate}}</td>
+        <td>{{money notIn.value}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}

@@ -22,6 +22,9 @@ export default function crudService(type){
           reject(errors);
         });
       }
+      if(this.sanitize){
+        this.sanitize(record);
+      }
       let ret = this.get('store').createRecord(type, record);
       return ret.save();
     },
@@ -32,6 +35,9 @@ export default function crudService(type){
         return new RSVP.Promise((resolve, reject) => {
           reject(errors);
         });
+      }
+      if(this.sanitize){
+        this.sanitize(record);
       }
       return record.save();
     },

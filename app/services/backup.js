@@ -6,6 +6,7 @@ import moment from 'moment';
 import md5 from 'md5';
 import RSVP from 'rsvp';
 import { get } from '@ember/object';
+import { storageFor } from 'ember-local-storage';
 
 export default Service.extend({
 
@@ -13,30 +14,39 @@ export default Service.extend({
   dropbox: inject('dropbox'),
   backupPath: '/accountsServantHelper.json',
   store: inject('store'),
-  settingsAttrs: ['openingBalance','otherBalance','congregation',
-    'city','state','midweekMeetingDay','watchtowerMeetingDay','accountsServantName',
-    'defaultOutgoingChequeAmt','khahc','gaa','coaa','ct'],
+  storage: storageFor('backup'),
 
+  read(){
+    return new RSVP.Promise((resolve) => {
+      resolve(Object.create(this.get('storage.content')));
+    })
+  },
+
+  update(backup){
+    return new RSVP.Promise((resolve) => {
+      this.get('storage').setProperties(backup);
+      resolve(backup);
+    });
+  },
 
   init(){
     this._super(...arguments);
     this.notifyDropboxTokenChange = this.notifyDropboxTokenChange.bind(this);
     this.get('settings.settings').addObserver('dropboxToken', this.notifyDropboxTokenChange);
-    //this.notifyDropboxTokenChange();
     window.addEventListener('beforeunload', this.notifyUnload.bind(this));
   },
 
   notifyDropboxTokenChange(){
     console.log('Dropbox token changed...');
-    let dropboxToken = this.get('settings.settings.dropboxToken');
+    let dropboxToken = this.get('backup.dropboxToken');
     this.get('dropbox').set('dropboxToken', dropboxToken);
     if(dropboxToken){
-      this.read().then(() => {
+      this.restoreFromBackup().then(() => {
         console.log('Backup read');
       },(error) => {
         let responseText = get(error, 'response.statusText');
         if(responseText && responseText.startsWith('path/not_found/')){
-          this.write();
+          this.saveBackup();
         }else{
           console.log('Reading backup failed', error);
         }
@@ -44,7 +54,7 @@ export default Service.extend({
     }
   },
 
-  read(){
+  restoreFromBackup(){
     console.log('Reading backup from dropbox...');
     return new RSVP.Promise((resolve, reject) => {
       this.get('dropbox').read(this.get('backupPath')).then((data) => {
@@ -56,7 +66,7 @@ export default Service.extend({
         this.overwrite('outgoing-cheque', backup.outgoingCheques);
         this.overwrite('weft', backup.wefts);
         this.get('settings.settings').setProperties(backup.settings);
-        this.get('settings.settings').setProperties({
+        this.get('storage').setProperties({
           dropboxSyncedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
           dropboxState: md5(data)
         });
@@ -68,10 +78,10 @@ export default Service.extend({
 
   notifyUnload(){
     console.log('Unloading...');
-    this.write();
+    this.saveBackup();
   },
 
-  write(){
+  saveBackup(force){
     console.log('Writing backup to dropbox...');
     return new RSVP.Promise((resolve, reject) => {
       RSVP.hash({
@@ -81,17 +91,17 @@ export default Service.extend({
         interestPayments: this.findAll('interest-payment'),
         outgoingCheques: this.findAll('outgoing-cheque'),
         wefts: this.findAll('weft'),
-        settings: this.get('settings').getProperties(this.get('settingsAttrs'))
+        settings: this.get('settings.settings.content')
       }).then((hash) => {
         let content = JSON.stringify(hash);
         let state = md5(content);
-        if(this.get('settings.settings.dropboxState') == state){
+        if((!force) && (this.get('backup.dropboxState') == state)){
           console.log('No changes to write to dropbox.');
           return;
         }
         this.get('dropbox').update(this.get('backupPath'), content).then(() => {
           console.log('...backup to dropbox written!');
-          this.get('settings.settings').setProperties({
+          this.get('storage').setProperties({
             dropboxSyncedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             dropboxState: state
           });

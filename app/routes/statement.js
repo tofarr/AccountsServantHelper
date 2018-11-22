@@ -1,13 +1,8 @@
-import Route from '@ember/routing/route';
-import { inject } from '@ember/service';
-import RSVP from 'rsvp';
-import moment from 'moment';
-import money from '../utils/money';
 import AbstractReportRoute from '../utils/abstract-report-route';
 
 export default AbstractReportRoute.extend({
 
-  modelCallback(hash, resolve, reject){
+  modelCallback(hash, resolve){
     let model = {
       monthParam: hash.month.format('YYYY-MM'),
       month: hash.month.format('MMMM YYYY'),
@@ -96,7 +91,6 @@ export default AbstractReportRoute.extend({
         value: -weft.get('total')
       });
     });
-    debugger;
     ret = ret.sortBy('date');
     ret.forEach((row) => {
       balance += row.value;

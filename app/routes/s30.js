@@ -1,7 +1,3 @@
-import Route from '@ember/routing/route';
-import { inject } from '@ember/service';
-import RSVP from 'rsvp';
-import moment from 'moment';
 import AbstractReportRoute from '../utils/abstract-report-route';
 
 export default AbstractReportRoute.extend({

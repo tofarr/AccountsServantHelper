@@ -17,9 +17,9 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "blueimp-md5": "^2.10.0",
     "broccoli-asset-rev": "^2.4.5",
     "dropbox": "^4.0.13",
-    "blueimp-md5": "^2.10.0",
     "ember-ajax": "^3.0.0",
     "ember-cli": "~3.0.0",
     "ember-cli-app-version": "^3.0.0",
@@ -35,6 +35,7 @@
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-uglify": "^2.0.0",
+    "ember-cordova": "^1.0.9",
     "ember-data": "~3.0.0",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",

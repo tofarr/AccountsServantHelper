@@ -250,7 +250,8 @@ h1,h2{
 
 @media only screen and (max-width: 600px) {
 
-  .ember-view button.button{
+  .ember-view button.button,
+  .ember-view .submit button{
     width: 100%;
     line-height: 40px;
     height: 40px;

@@ -13,15 +13,12 @@
     {{#each sortedList as |outgoingCheque|}}
       <tr class="{{if outgoingCheque.processedDate "processed" "unprocessed"}}">
         <td>{{outgoingCheque.issueDate}}</td>
-        <td class="not-mobile">
-          {{pikaday-input value=(readonly outgoingCheque.processedDate) onSelection=(action "setProcessedDate" outgoingCheque) format="YYYY-MM-DD"}}
-        </td>
+        <td class="not-mobile">{{outgoingCheque.processedDate}}</td>
         <td class="not-mobile">{{outgoingCheque.chequeId}}</td>
         <td class="not-mobile">{{outgoingCheque.notes}}</td>
         <td class="money">{{money outgoingCheque.value}}</td>
         <td class="actions">
-          <button class="view mobile-only" {{action "view" outgoingCheque}}>View</button>
-          <button class="update not-mobile" {{action "update" outgoingCheque}}>Update</button>
+          <button class="view" {{action "view" outgoingCheque}}>View</button>
           <button class="delete" {{action "remove" outgoingCheque}}>Delete</button>
         </td>
       </tr>

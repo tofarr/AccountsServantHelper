@@ -2,11 +2,12 @@
   <thead>
     <tr>
       <th>Date</th>
-      <th class="not-mobile">Local</th>
-      <th class="not-mobile">Worldwide</th>
-      <th class="not-mobile">Cash</th>
-      <th class="not-mobile">Cheques</th>
-      <th>Total</th>
+      <th class="money not-mobile">Worldwide</th>
+      <th class="money not-mobile">Local</th>
+      <th class="money not-mobile">Cash</th>
+      <th class="money not-mobile">Cheques</th>
+      <th class="not-mobile">Cancellation</th>
+      <th class="money">Total</th>
       <th>&nbsp;</th>
     </tr>
   </thead>
@@ -14,10 +15,11 @@
     {{#each sortedList as |meeting|}}
       <tr>
         <td>{{meeting.date}}</td>
-        <td class="money not-mobile">{{money meeting.local}}</td>
         <td class="money not-mobile">{{money meeting.worldwide}}</td>
+        <td class="money not-mobile">{{money meeting.local}}</td>
         <td class="money not-mobile">{{money meeting.cash}}</td>
         <td class="money not-mobile">{{money meeting.cheques}}</td>
+        <td class="not-mobile">{{meeting.cancellation}}</td>
         <td class="money">{{money meeting.total}}</td>
         <td class="actions">
           <button class="view mobile-only" {{action "view" meeting}}>View</button>

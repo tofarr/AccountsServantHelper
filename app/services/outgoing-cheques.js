@@ -62,14 +62,19 @@ export default crudService('outgoing-cheque').extend({
           let processedDate = outgoingCheque.get('processedDate');
           if(issueDate < startDate){
             ret.opening += outgoingCheque.get('value');
-            if(processedDate >= startDate && processedDate < endDate){
+            if(!processedDate){
+              ret.notInOpening.push(outgoingCheque);
+              ret.notInOpeningTotal += outgoingCheque.get('value');
+              ret.notInClosing.push(outgoingCheque);
+              ret.notInClosingTotal += outgoingCheque.get('value');
+            }else if(processedDate >= startDate && processedDate < endDate){
               ret.notInOpening.push(outgoingCheque);
               ret.notInOpeningTotal += outgoingCheque.get('value');
             }
           }else if(issueDate < endDate){
             ret.value += outgoingCheque.get('value');
             ret.results.push(outgoingCheque);
-            if(processedDate > endDate){
+            if((!processedDate) || (processedDate > endDate)){
               ret.notInClosing.push(outgoingCheque);
               ret.notInClosingTotal += outgoingCheque.get('value');
             }

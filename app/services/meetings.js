@@ -18,10 +18,10 @@ export default crudService('meeting').extend({
 
   validate(meeting){
     var ret = [];
-    let cash = get(meeting, 'cash');
-    let cheques = get(meeting, 'cheques');
-    let local = get(meeting, 'local');
-    let worldwide = get(meeting, 'worldwide');
+    let cash = get(meeting, 'cash') || 0;
+    let cheques = get(meeting, 'cheques') || 0;
+    let local = get(meeting, 'local') || 0;
+    let worldwide = get(meeting, 'worldwide') || 0;
     if (cash < 0 || cheques < 0 || local < 0 || worldwide < 0){
       ret.push("All amounts must be greater than or equal to 0.");
     }

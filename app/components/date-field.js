@@ -13,8 +13,10 @@ export default Component.extend({
   }),
 
   actions: {
-    valueChanged(){
-      debugger;
+    valueChanged(event){
+      let value = event.target.value;
+      let sanitized = moment(value, 'YYYY-MM-DD').format('YYYY-MM-DD');
+      this.set('value', (sanitized == value) ? value : null);
     },
 
     valueDateChanged(value){

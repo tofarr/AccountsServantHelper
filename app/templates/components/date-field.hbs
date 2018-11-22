@@ -1,6 +1,6 @@
 <span class="label">{{title}}</span>
 <div class="date">
-  {{input value=(readonly value) onChange=(action "valueChanged") disabled=disabled class="date-text-field" style="flex-grow:1;"}}
+  {{input value=(readonly value) change=(action "valueChanged") disabled=disabled class="date-text-field" style="flex-grow:1;"}}
   {{#unless disabled}}
     <button type="button" {{action toggleProperty "showPika"}}>
       <img src="assets/images/calendar.png" title="Choose Date" />

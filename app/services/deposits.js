@@ -24,7 +24,7 @@ export default crudService('deposit').extend({
   validate(deposit){
     var ret = [];
     let cash = get(deposit,'cash');
-    let cheques = get(deposit,'cash');
+    let cheques = get(deposit,'cheques');
     if (cash < 0 || cheques < 0){
       ret.push("Cash and Cheques must both be greater than or equal to 0.");
     }

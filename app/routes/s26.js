@@ -9,13 +9,14 @@ export default AbstractReportRoute.extend({
 
   modelCallback(hash, resolve){
     let model = {
+      monthParam: hash.month.format('YYYY-MM'),
       month: hash.month.format('MMMM'),
       year: hash.month.year(),
       monthEnding: hash.month.endOf('month').format('MMMM DD YYYY'),
       congregation: hash.settings.congregation,
       city: hash.settings.city,
       state: hash.settings.state,
-      openingBalance: hash.settings.openingBalance + hash.deposits.totalOpening + hash.incomingTransfers.opening - hash.outgoingCheques.opening + hash.interestPayments.opening + hash.wefts.totalOpening,
+      openingBalance: hash.settings.openingBalance + hash.deposits.totalOpening + hash.incomingTransfers.opening - hash.outgoingCheques.opening + hash.interestPayments.opening - hash.wefts.totalOpening,
       otherBalance: hash.settings.otherBalance,
       receiptsIn: hash.meetings.total,
       receiptsOut: hash.deposits.total,
@@ -29,6 +30,7 @@ export default AbstractReportRoute.extend({
     model.receiptsBalance = model.receiptsIn - model.receiptsOut;
     model.checkingAccountBalance = model.checkingAccountIn - model.checkingAccountOut;
     model.closingAccountBalance = model.checkingAccountBalance + model.openingBalance;
+    model.totalAtEndOfMonth = model.closingAccountBalance + model.otherBalance;
     resolve(model);
   },
 

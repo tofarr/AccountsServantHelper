@@ -21,11 +21,12 @@ export default AbstractReportRoute.extend({
 
 
     var model = {
+      monthParam: hash.month.format('YYYY-MM'),
       congregation: hash.settings.congregation,
       accountsServantName: hash.settings.accountsServantName,
       month: hash.month.format('MMMM'),
       year: hash.month.year(),
-      openingBalance: hash.settings.openingBalance + hash.deposits.totalOpening + hash.incomingTransfers.opening - hash.outgoingCheques.opening + hash.interestPayments.opening + hash.wefts.totalOpening,
+      openingBalance: hash.settings.openingBalance + hash.deposits.totalOpening + hash.incomingTransfers.opening - hash.outgoingCheques.opening + hash.interestPayments.opening - hash.wefts.totalOpening,
 
       localIncomeItems: [
         {title: 'Congregation Contributions', value: hash.meetings.local},

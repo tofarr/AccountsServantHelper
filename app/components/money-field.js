@@ -10,7 +10,7 @@ export default Component.extend({
   disabled: false,
 
   change(event){
-    this.set('value', parseInt(parseFloat(event.target.value) * 100) || 0);
+    this.set('value', Math.round(parseFloat(event.target.value) * 100) || 0);
   },
 
   formattedValue: computed('value', function(){

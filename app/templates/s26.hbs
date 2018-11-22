@@ -1,5 +1,7 @@
 <form class="print-form">
   <button type="button" {{action "print"}}>Print</button>
+  {{#link-to "statement" (query-params month=model.monthParam)}}<button>Statement</button>{{/link-to}}
+  {{#link-to "s30" (query-params month=model.monthParam)}}<button>S30</button>{{/link-to}}
   {{warning-list warnings=model.warnings}}
 </form>
 
@@ -54,11 +56,11 @@
   <text x="560" y="1502" text-anchor="end" font-size="24">{{money model.openingBalance}}</text>
   <text x="560" y="1536" text-anchor="end" font-size="24">{{money model.checkingAccountIn}}</text>
   <text x="560" y="1568" text-anchor="end" font-size="24">{{money model.checkingAccountOut}}</text>
-  <text x="810" y="1602" text-anchor="end" font-size="24">{{money model.checkingAccountBalance}}</text>
+  <text x="810" y="1602" text-anchor="end" font-size="24">{{money model.closingAccountBalance}}</text>
 
   <text x="560" y="1748" text-anchor="end" font-size="24">{{money model.otherBalance}}</text>
   <text x="810" y="1846" text-anchor="end" font-size="24">{{money model.otherBalance}}</text>
 
-  <text x="810" y="1917" text-anchor="end" font-size="24">{{money model.closingAccountBalance}}</text>
+  <text x="810" y="1917" text-anchor="end" font-size="24">{{money model.totalAtEndOfMonth}}</text>
 
 </svg>

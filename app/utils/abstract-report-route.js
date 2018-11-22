@@ -2,6 +2,7 @@ import Route from '@ember/routing/route';
 import { inject } from '@ember/service';
 import RSVP from 'rsvp';
 import moment from 'moment';
+import money from '../utils/money';
 
 export default Route.extend({
 
@@ -46,6 +47,7 @@ export default Route.extend({
     let warnings = [];
     this.addExpectedMeetingWarnings(meetings, expectedMeetingDates, warnings);
     this.addMeetingMatchDepositWarning(meetings, deposits, warnings);
+    this.addOutgoingChequesWarning(outgoingCheques, warnings);
     this.addIncomingTransfersWarning(incomingTransfers, warnings);
     this.addInterestPaymentsWarning(interestPayments, warnings);
     this.addWeftsWarning(wefts, warnings);
@@ -69,7 +71,7 @@ export default Route.extend({
 
   addMeetingMatchDepositWarning(meetings, deposits, warnings){
     if(meetings.total != deposits.total){
-      warnings.push('Expected receipts ('+meetings.total+') to match deposits ('+deposits.total+')');
+      warnings.push('Expected receipts ('+money(meetings.total)+') to match deposits ('+money(deposits.total)+')');
     }
   },
 
@@ -83,6 +85,11 @@ export default Route.extend({
     if(!outgoingCheques.results.length){
       warnings.push('Expected at least 1 outgoing cheque');
     }
+    outgoingCheques.results.forEach((outgoingCheque) => {
+      if(!outgoingCheque.get('processedDate')){
+        warnings.push('Unprocessed Cheque: '+outgoingCheque.get('chequeId')+' ('+outgoingCheque.get('issueDate')+') : '+money(outgoingCheque.get('value')));
+      }
+    });
   },
 
   addInterestPaymentsWarning(interestPayments, warnings){

@@ -118,12 +118,13 @@ table{
 th{
   padding: 4px;
   border-bottom: 2px solid #4a6da7;
+  text-align:left;
 }
 td{
   white-space: nowrap;
   padding: 4px;
 }
-td.money,td.actions{
+td.money,td.actions,th.money{
   text-align: right;
 }
 
@@ -209,9 +210,24 @@ a{
   line-height: 30px;
 }
 
-h2{
-  padding: 25px 10px 5px 10px;
+h1,h2{
+  padding: 40px 0px 5px 0px;
   margin: 0;
+}
+
+.statement{
+  padding: 0 10px 10px 10px;
+}
+
+.total td{
+  border: 2px solid #4a6da7;
+  border-left: none;
+  border-right: none;
+}
+
+.total:first-child td{
+  border-right: none;
+  border-top: none;
 }
 
 @media only screen and (min-width: 600px) {
@@ -233,6 +249,10 @@ h2{
     width: 100%;
     line-height: 40px;
     height: 40px;
+  }
+
+  .ember-view td{
+    line-height: 40px;
   }
 
   .not-mobile{
@@ -276,5 +296,11 @@ h2{
   .s30-page-container{
     page-break-before: always;
     page-break-inside: avoid;
+  }
+  .statement{
+    padding: 0 30px;
+  }
+  .statement table{
+
   }
 }

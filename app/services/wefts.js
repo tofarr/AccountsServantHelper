@@ -75,6 +75,7 @@ export default crudService('weft').extend({
           coaaOpening: 0,
           ctOpening: 0,
           worldwideOpening: 0,
+          worldwideResolutionOpening: 0,
           totalOpening: 0,
 
           khahc: 0,
@@ -82,6 +83,7 @@ export default crudService('weft').extend({
           coaa: 0,
           ct: 0,
           worldwide: 0,
+          worldwideResolution: 0,
           total: 0,
 
           khahcClosing: 0,
@@ -89,6 +91,7 @@ export default crudService('weft').extend({
           coaaClosing: 0,
           ctClosing: 0,
           worldwideClosing: 0,
+          worldwideResolutionClosing: 0,
           totalClosing: 0,
 
           results: [],
@@ -106,7 +109,9 @@ export default crudService('weft').extend({
             ret.coaaOpening += weft.get('coaa');
             ret.ctOpening += weft.get('ct');
             ret.worldwideOpening += weft.get('worldwide');
-            if(date >= startDate && processedDate < endDate){
+            ret.worldwideResolutionOpening += weft.get('worldwideResolution');
+            ret.totalOpening += weft.get('total');
+            if(date >= startDate && date < endDate){
               ret.notInOpening.push(weft);
               ret.notInOpeningTotal += weft.get('total');
             }
@@ -116,6 +121,8 @@ export default crudService('weft').extend({
             ret.coaa += weft.get('coaa');
             ret.ct += weft.get('ct');
             ret.worldwide += weft.get('worldwide');
+            ret.worldwideResolution += weft.get('worldwideResolution');
+            ret.total += weft.get('total');
             ret.results.push(weft);
             if(date > endDate){
               ret.notInClosing.push(weft);
@@ -124,12 +131,13 @@ export default crudService('weft').extend({
           }
         });
         ret.results.sortBy('forLastMeeting');
-        ret.totalOpening
         ret.KhahcClosing = ret.khahcOpening + ret.khahc;
         ret.GaaClosing = ret.gaaOpening + ret.gaa;
         ret.CoaaClosing = ret.coaaOpening + ret.khahc;
         ret.CtClosing = ret.ctOpening + ret.khahc;
-        ret.WorldwideClosing = ret.worldwideOpening + ret.khahc;
+        ret.worldwideClosing = ret.worldwideOpening + ret.khahc;
+        ret.worldwideResolutionClosing = ret.worldwideResolutionOpening + ret.worldwideResolution;
+        ret.totalClosing = ret.totalOpening + ret.total;
         resolve(ret);
       }, reject);
     });

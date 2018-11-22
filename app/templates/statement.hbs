@@ -9,116 +9,124 @@
 <div class="statement">
   <h1>{{model.month}} Statement Reconcilliation</h1>
 
-  <table class="crud-table statment-table" cellpadding="0" cellspacing="0">
-    <thead>
-      <tr>
-        <th></th>
-        <th class="money">Account</th>
-        <th class="money">Statement</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Opening Balance</td>
-        <td class="money">{{money model.openingBalance}}</td>
-        <td class="money">{{money model.openingStatement}}</td>
-      </tr>
-      <tr>
-        <td>Month Balance</td>
-        <td class="money">{{money model.monthBalance}}</td>
-        <td class="money">{{money model.monthStatement}}</td>
-      </tr>
-      <tr>
-        <td>Closing Balance</td>
-        <td class="money">{{money model.closingBalance}}</td>
-        <td class="money">{{money model.closingStatement}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table class="crud-table statment-table" cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="money">Account</th>
+          <th class="money">Statement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Opening Balance</td>
+          <td class="money">{{money model.openingBalance}}</td>
+          <td class="money">{{money model.openingStatement}}</td>
+        </tr>
+        <tr>
+          <td>Month Balance</td>
+          <td class="money">{{money model.monthBalance}}</td>
+          <td class="money">{{money model.monthStatement}}</td>
+        </tr>
+        <tr>
+          <td>Closing Balance</td>
+          <td class="money">{{money model.closingBalance}}</td>
+          <td class="money">{{money model.closingStatement}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   {{#if model.notInOpening.length}}
     <h2>Not In Statement Opening Balance</h2>
 
-    <table class="crud-table not-in-closing-table" cellpadding="0" cellspacing="0">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Date</th>
-          <th>Statement Date</th>
-          <th class="money">Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each model.notInOpening as |notIn|}}
-        <tr>
-          <td>{{notIn.type}}</td>
-          <td>{{notIn.date}}</td>
-          <td>{{notIn.statementDate}}</td>
-          <td class="money">{{money notIn.value}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table class="crud-table not-in-closing-table" cellpadding="0" cellspacing="0">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Date</th>
+            <th>Statement Date</th>
+            <th class="money">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each model.notInOpening as |notIn|}}
+          <tr>
+            <td>{{notIn.type}}</td>
+            <td>{{notIn.date}}</td>
+            <td>{{notIn.statementDate}}</td>
+            <td class="money">{{money notIn.value}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
   {{/if}}
 
 
   {{#if model.notInClosing.length}}
     <h2>Not In Statement Closing Balance</h2>
 
-    <table class="crud-table not-in-opening-table" cellpadding="0" cellspacing="0">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Date</th>
-          <th>Statement Date</th>
-          <th class="money">Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each model.notInClosing as |notIn|}}
-        <tr>
-          <td>{{notIn.type}}</td>
-          <td>{{notIn.date}}</td>
-          <td>{{notIn.statementDate}}</td>
-          <td class="money">{{money notIn.value}}</td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table class="crud-table not-in-opening-table" cellpadding="0" cellspacing="0">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Date</th>
+            <th>Statement Date</th>
+            <th class="money">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each model.notInClosing as |notIn|}}
+          <tr>
+            <td>{{notIn.type}}</td>
+            <td>{{notIn.date}}</td>
+            <td>{{notIn.statementDate}}</td>
+            <td class="money">{{money notIn.value}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
   {{/if}}
 
   <h2>Cheque Payment and Deposit Register</h2>
 
-  <table class="crud-table register-table" cellpadding="0" cellspacing="0">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th class="money">Value</th>
-        <th class="money">Balance</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="total">
-        <td>Opening Balance</td>
-        <td></td>
-        <td></td>
-        <td class="money">{{money model.openingBalance}}</td>
-      </tr>
-      {{#each model.rows as |row|}}
-      <tr>
-        <td>{{row.date}}</td>
-        <td>{{row.description}}</td>
-        <td class="money">{{money row.value}}</td>
-        <td class="money">{{money row.balance}}</td>
-      </tr>
-      {{/each}}
-      <tr class="total">
-        <td>Closing Balance</td>
-        <td></td>
-        <td></td>
-        <td class="money">{{money model.closingBalance}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-container">
+    <table class="crud-table register-table" cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th class="money">Value</th>
+          <th class="money">Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="total">
+          <td>Opening Balance</td>
+          <td></td>
+          <td></td>
+          <td class="money">{{money model.openingBalance}}</td>
+        </tr>
+        {{#each model.rows as |row|}}
+        <tr>
+          <td>{{row.date}}</td>
+          <td>{{row.description}}</td>
+          <td class="money">{{money row.value}}</td>
+          <td class="money">{{money row.balance}}</td>
+        </tr>
+        {{/each}}
+        <tr class="total">
+          <td>Closing Balance</td>
+          <td></td>
+          <td></td>
+          <td class="money">{{money model.closingBalance}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

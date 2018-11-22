@@ -24,7 +24,8 @@ export default Service.extend({
 
   update(backup){
     return new RSVP.Promise((resolve) => {
-      this.get('storage').setProperties(backup);
+      this.get('storage').set('dropboxToken', backup.dropboxToken);
+      this.get('storage').set('dropboxSyncedAt', backup.dropboxSyncedAt);
       resolve(backup);
     });
   },
@@ -38,7 +39,7 @@ export default Service.extend({
 
   notifyDropboxTokenChange(){
     console.log('Dropbox token changed...');
-    let dropboxToken = this.get('backup.dropboxToken');
+    let dropboxToken = this.get('storage.dropboxToken');
     this.get('dropbox').set('dropboxToken', dropboxToken);
     if(dropboxToken){
       this.restoreFromBackup().then(() => {

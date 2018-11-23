@@ -1,7 +1,11 @@
 <form class="print-form">
-  <button type="button" {{action "print"}}>Print</button>
-  {{#link-to "statement" (query-params month=model.monthParam)}}<button>Statement</button>{{/link-to}}
-  {{#link-to "s26" (query-params month=model.monthParam)}}<button>S26</button>{{/link-to}}
+  <div class="actions">
+    <button type="button" {{action "print"}}>Print</button>
+    {{#link-to "statement" (query-params month=model.monthParam)}}<button>Statement</button>{{/link-to}}
+    {{#link-to "s26" (query-params month=model.monthParam)}}<button>S26</button>{{/link-to}}
+    {{#link-to "s30" (query-params month=model.prevMonthParam)}}<button>Prev</button>{{/link-to}}
+    {{#link-to "s30" (query-params month=model.nextMonthParam)}}<button>Next</button>{{/link-to}}
+  </div>
   {{warning-list warnings=model.warnings}}
 </form>
 

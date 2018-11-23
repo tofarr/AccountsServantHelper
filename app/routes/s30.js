@@ -18,6 +18,8 @@ export default AbstractReportRoute.extend({
 
     var model = {
       monthParam: hash.month.format('YYYY-MM'),
+      prevMonthParam: moment(hash.month).add(-1, 'month').format('YYYY-MM'),
+      nextMonthParam: moment(hash.month).add(1, 'month').format('YYYY-MM'),
       congregation: hash.settings.congregation,
       accountsServantName: hash.settings.accountsServantName,
       month: hash.month.format('MMMM'),

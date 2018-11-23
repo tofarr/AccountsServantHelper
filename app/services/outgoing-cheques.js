@@ -67,9 +67,15 @@ export default crudService('outgoing-cheque').extend({
               ret.notInOpeningTotal += outgoingCheque.get('value');
               ret.notInClosing.push(outgoingCheque);
               ret.notInClosingTotal += outgoingCheque.get('value');
-            }else if(processedDate >= startDate && processedDate < endDate){
-              ret.notInOpening.push(outgoingCheque);
-              ret.notInOpeningTotal += outgoingCheque.get('value');
+            }else{
+               if(processedDate >= startDate){
+                ret.notInOpening.push(outgoingCheque);
+                ret.notInOpeningTotal += outgoingCheque.get('value');
+              }
+              if(processedDate >= endDate){
+                ret.notInClosing.push(outgoingCheque);
+                ret.notInClosingTotal += outgoingCheque.get('value');
+              }
             }
           }else if(issueDate < endDate){
             ret.value += outgoingCheque.get('value');

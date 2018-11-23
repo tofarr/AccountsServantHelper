@@ -111,9 +111,13 @@ export default crudService('weft').extend({
             ret.worldwideOpening += weft.get('worldwide');
             ret.worldwideResolutionOpening += weft.get('worldwideResolution');
             ret.totalOpening += weft.get('total');
-            if(date >= startDate && date < endDate){
+            if(date >= startDate){
               ret.notInOpening.push(weft);
               ret.notInOpeningTotal += weft.get('total');
+            }
+            if(date >= endDate){
+              ret.notInClosing.push(weft);
+              ret.notInClosingTotal += weft.get('total');
             }
           }else if(forLastMeeting < endDate){
             ret.khahc += weft.get('khahc');

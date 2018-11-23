@@ -5,6 +5,8 @@ export default AbstractReportRoute.extend({
   modelCallback(hash, resolve){
     let model = {
       monthParam: hash.month.format('YYYY-MM'),
+      prevMonthParam: moment(hash.month).add(-1, 'month').format('YYYY-MM'),
+      nextMonthParam: moment(hash.month).add(1, 'month').format('YYYY-MM'),
       month: hash.month.format('MMMM YYYY'),
       warnings: this.calculateWarnings(hash.meetings, hash.expectedMeetingDates, hash.deposits, hash.incomingTransfers, hash.outgoingCheques, hash.interestPayments, hash.wefts),
       openingBalance: hash.settings.openingBalance + hash.deposits.totalOpening + hash.incomingTransfers.opening - hash.outgoingCheques.opening + hash.interestPayments.opening - hash.wefts.totalOpening,

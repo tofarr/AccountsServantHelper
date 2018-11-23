@@ -62,9 +62,13 @@ export default crudService('deposit').extend({
           if(forLastMeeting < startDate){
             ret.cashOpening += deposit.get('cash');
             ret.chequesOpening += deposit.get('cheques');
-            if(date >= startDate && date < endDate){
+            if(date >= startDate){
               ret.notInOpening.push(deposit);
               ret.notInOpeningTotal += deposit.get('total');
+            }
+            if(date >= endDate){
+              ret.notInClosing.push(deposit);
+              ret.notInClosingTotal += deposit.get('total');
             }
           }else if(forLastMeeting < endDate){
             ret.cash += deposit.get('cash');

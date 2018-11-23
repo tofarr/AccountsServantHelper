@@ -6,6 +6,8 @@ export default AbstractReportRoute.extend({
   modelCallback(hash, resolve){
     let model = {
       monthParam: hash.month.format('YYYY-MM'),
+      prevMonthParam: moment(hash.month).add(-1, 'month').format('YYYY-MM'),
+      nextMonthParam: moment(hash.month).add(1, 'month').format('YYYY-MM'),
       month: hash.month.format('MMMM'),
       year: hash.month.year(),
       monthEnding: hash.month.endOf('month').format('MMMM DD YYYY'),

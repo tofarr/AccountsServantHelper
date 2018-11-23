@@ -6,6 +6,9 @@ Storage.reopenClass({
   initialState() {
     return {
       openingBalance: 0,
+      openingCash: 0,
+      openingCheques: 0,
+      openingWefts: 0,
       otherBalance: 0,
       congregation: null,
       city: null,

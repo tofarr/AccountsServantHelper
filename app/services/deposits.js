@@ -70,7 +70,7 @@ export default crudService('deposit').extend({
             ret.cash += deposit.get('cash');
             ret.cheques += deposit.get('cheques');
             ret.results.push(deposit);
-            if(date > endDate){
+            if(date >= endDate){
               ret.notInClosing.push(deposit);
               ret.notInClosingTotal += deposit.get('total');
             }

@@ -74,7 +74,7 @@ export default crudService('outgoing-cheque').extend({
           }else if(issueDate < endDate){
             ret.value += outgoingCheque.get('value');
             ret.results.push(outgoingCheque);
-            if((!processedDate) || (processedDate > endDate)){
+            if((!processedDate) || (processedDate >= endDate)){
               ret.notInClosing.push(outgoingCheque);
               ret.notInClosingTotal += outgoingCheque.get('value');
             }

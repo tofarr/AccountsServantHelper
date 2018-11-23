@@ -124,7 +124,7 @@ export default crudService('weft').extend({
             ret.worldwideResolution += weft.get('worldwideResolution');
             ret.total += weft.get('total');
             ret.results.push(weft);
-            if(date > endDate){
+            if(date >= endDate){
               ret.notInClosing.push(weft);
               ret.notInClosingTotal += weft.get('total');
             }

@@ -1,6 +1,9 @@
 <fieldset>
   <legend>{{title}}</legend>
   {{money-field title="Opening Balance" value=model.openingBalance}}
+  {{money-field title="Opening Cash Receipts" value=model.openingCash}}
+  {{money-field title="Opening Cheque Receipts" value=model.openingCheques}}
+  {{money-field title="Opening WEFTS" value=model.openingWefts}}
   {{money-field title="Other Balance" value=model.otherBalance}}
   {{money-field title="Default Outgoing Cheque Amount" value=model.defaultOutgoingChequeAmt}}
   {{text-field title="Congregation" value=model.congregation}}

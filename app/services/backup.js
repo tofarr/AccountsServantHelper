@@ -15,6 +15,7 @@ export default Service.extend({
   backupPath: '/accountsServantHelper.json',
   store: inject('store'),
   storage: storageFor('backup'),
+  toast: inject('toast'),
 
   read(){
     return new RSVP.Promise((resolve) => {
@@ -32,27 +33,10 @@ export default Service.extend({
 
   init(){
     this._super(...arguments);
-    this.notifyDropboxTokenChange = this.notifyDropboxTokenChange.bind(this);
-    this.get('storage').addObserver('dropboxToken', this.notifyDropboxTokenChange);
-    window.addEventListener('beforeunload', this.notifyUnload.bind(this));
-  },
-
-  notifyDropboxTokenChange(){
-    console.log('Dropbox token changed...');
-    let dropboxToken = this.get('storage.dropboxToken');
-    this.get('dropbox').set('dropboxToken', dropboxToken);
-    if(dropboxToken){
-      this.restoreFromBackup().then(() => {
-        console.log('Backup read');
-      },(error) => {
-        let responseText = get(error, 'response.statusText');
-        if(responseText && responseText.startsWith('path/not_found/')){
-          this.saveBackup();
-        }else{
-          console.log('Reading backup failed', error);
-        }
-      });
-    }
+    this.notifyUnload = this.notifyUnload.bind(this);
+    window.addEventListener('beforeunload', this.notifyUnload);
+    this.notifyBlur = this.notifyBlur.bind(this);
+    window.addEventListener('blur', this.notifyBlur)
   },
 
   restoreFromBackup(){
@@ -77,9 +61,20 @@ export default Service.extend({
     });
   },
 
+  notifyBlur(event){
+    if(event.target == window){
+      this.notifyUnload();
+    }
+  },
+
   notifyUnload(){
-    console.log('Unloading...');
-    this.saveBackup();
+    //Dont thrash dropbox - autosave a max of once every 10 minutes
+    let dropboxSyncedAt = this.get('storage.dropboxSyncedAt');
+    let now = moment().valueOf();
+    let nextSync = dropboxSyncedAt ? moment(dropboxSyncedAt, 'YYYY-MM-DD HH:mm:ss').add(10, 'minute').valueOf() : now;
+    if(nextSync <= now){
+      this.saveBackup();
+    }
   },
 
   saveBackup(force){
@@ -96,8 +91,9 @@ export default Service.extend({
       }).then((hash) => {
         let content = JSON.stringify(hash);
         let state = md5(content);
-        if((!force) && (this.get('backup.dropboxState') == state)){
+        if((!force) && (this.get('storage.dropboxState') == state)){
           console.log('No changes to write to dropbox.');
+          resolve();
           return;
         }
         this.get('dropbox').update(this.get('backupPath'), content).then(() => {
@@ -106,6 +102,7 @@ export default Service.extend({
             dropboxSyncedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
             dropboxState: state
           });
+          resolve();
         }, reject);
       }, reject);
     });

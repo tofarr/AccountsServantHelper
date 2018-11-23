@@ -8,13 +8,25 @@ export default Component.extend({
   title: 'Update Settings',
   submitText: 'Save Changes',
   backup: inject('backup'),
+  toast: inject('toast'),
 
   actions: {
     saveBackup(){
-      this.get('backup').saveBackup();
+      this.get('backup').saveBackup().then(() => {
+        this.get('toast').info('Backup saved');
+      },()=>{
+        this.get('toast').info('Saving backup failed');
+      });
     },
     restoreFromBackup(){
-      this.get('backup').restoreFromBackup();
+      if(!confirm('Are you sure? (This cannot be undone!)')){
+        return;
+      }
+      this.get('backup').restoreFromBackup().then(() => {
+        this.get('toast').info('Backup read');
+      },()=>{
+        this.get('toast').info('Reading backup failed');
+      });
     }
   }
 });

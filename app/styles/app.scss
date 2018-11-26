@@ -280,7 +280,26 @@ h1,h2{
     right: 0;
   }
 
+  .report-actions{
+    display: flex;
+    flex-direction: row;
+  }
+  .report-actions button,
+  .report-actions a{
+    display: block;
+    flex-grow: 1;
+  }
+  .report-actions a{
+    padding-left: 5px;
+  }
+  .report-actions a button{
+    width: 100%;
+  }
+  .report-actions input{
+    width: 100%;
+  }
 }
+
 
 @media print {
   @page {

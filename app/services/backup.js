@@ -5,7 +5,6 @@ import { inject } from '@ember/service';
 import moment from 'moment';
 import md5 from 'md5';
 import RSVP from 'rsvp';
-import { get } from '@ember/object';
 import { storageFor } from 'ember-local-storage';
 
 export default Service.extend({
@@ -81,12 +80,12 @@ export default Service.extend({
     console.log('Writing backup to dropbox...');
     return new RSVP.Promise((resolve, reject) => {
       RSVP.hash({
-        meetings: this.findAll('meeting'),
-        deposits: this.findAll('deposit'),
-        incomingTransfers: this.findAll('incoming-transfer'),
-        interestPayments: this.findAll('interest-payment'),
-        outgoingCheques: this.findAll('outgoing-cheque'),
-        wefts: this.findAll('weft'),
+        meetings: this.findAll('meeting', 'date'),
+        deposits: this.findAll('deposit', 'date'),
+        incomingTransfers: this.findAll('incoming-transfer', 'date'),
+        interestPayments: this.findAll('interest-payment', 'date'),
+        outgoingCheques: this.findAll('outgoing-cheque', 'issueDate'),
+        wefts: this.findAll('weft', 'date'),
         settings: this.get('settings.settings.content')
       }).then((hash) => {
         let content = JSON.stringify(hash);
@@ -133,9 +132,10 @@ export default Service.extend({
     })
   },
 
-  findAll(type){
+  findAll(type, sortBy){
     return new RSVP.Promise((resolve, reject) => {
       this.get('store').findAll(type).then((records) => {
+        records = records.sortBy(sortBy);
         resolve(records.map((record) => {
           return record.toJSON();
         }));

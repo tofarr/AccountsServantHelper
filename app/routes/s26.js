@@ -1,5 +1,6 @@
 import money from '../utils/money';
 import AbstractReportRoute from '../utils/abstract-report-route';
+import moment from 'moment';
 
 export default AbstractReportRoute.extend({
 

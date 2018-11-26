@@ -6,7 +6,11 @@ export default Controller.extend({
 
   actions: {
     print(){
-      window.print();
+      if(window.tofarrCordovaPrint){
+        window.tofarrCordovaPrint.doPrint();
+      }else{
+        window.print();
+      }
     }
   }
 });

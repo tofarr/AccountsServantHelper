@@ -4,8 +4,11 @@
   {{text-field title="Last Sync" value=model.dropboxSyncedAt disabled=true}}
 
   <div class="submit">
+    {{noToken}}
     <button type="submit">{{submitText}}</button>
-    <button type="button" {{action "saveBackup"}}>Save to backup</button>
-    <button type="button" {{action "restoreFromBackup"}}>Restore from backup</button>
+    {{#if backup.dropbox.dropbox}}
+      <button type="button" {{action "saveBackup"}}>Save to backup</button>
+      <button type="button" {{action "restoreFromBackup"}}>Restore from backup</button>
+    {{/if}}
   </div>
 </fieldset>

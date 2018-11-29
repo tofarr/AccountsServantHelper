@@ -4,6 +4,7 @@
   {{text-field title="Last Sync" value=model.dropboxSyncedAt disabled=true}}
 
   <div class="submit">
+    {{model.dropboxSyncedAt}}
     <button type="submit">{{submitText}}</button>
     <button type="button" {{action "saveBackup"}}>Save to backup</button>
     <button type="button" {{action "restoreFromBackup"}}>Restore from backup</button>

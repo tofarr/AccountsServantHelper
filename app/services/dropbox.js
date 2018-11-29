@@ -2,13 +2,13 @@ import Service from '@ember/service';
 import RSVP from 'rsvp';
 import dropbox from 'dropbox';
 import { computed } from '@ember/object';
-import { inject } from '@ember/service';
 import { alias } from '@ember/object/computed';
+import { storageFor } from 'ember-local-storage';
 
 export default Service.extend({
 
-  settings: inject('settings'),
-  dropboxToken: alias('settings.settings.dropboxToken'),
+  backup: storageFor('backup'),
+  dropboxToken: alias('backup.dropboxToken'),
   dropbox: computed('dropboxToken', function(){
     let dropboxToken = this.get('dropboxToken');
     return dropboxToken ? new dropbox.Dropbox({ accessToken: dropboxToken }) : null;

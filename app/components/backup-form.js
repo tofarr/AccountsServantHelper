@@ -14,8 +14,10 @@ export default Component.extend({
     saveBackup(){
       this.get('backup').saveBackup().then(() => {
         this.get('toast').info('Backup saved');
+        this.notifyPropertyChange('model');
+        this.rerender();
       },()=>{
-        this.get('toast').info('Saving backup failed');
+        this.get('toast').error('Saving backup failed');
       });
     },
     restoreFromBackup(){
@@ -24,8 +26,10 @@ export default Component.extend({
       }
       this.get('backup').restoreFromBackup().then(() => {
         this.get('toast').info('Backup read');
+        this.notifyPropertyChange('model');
+        this.rerender();
       },()=>{
-        this.get('toast').info('Reading backup failed');
+        this.get('toast').error('Reading backup failed');
       });
     }
   }

@@ -25,13 +25,14 @@ export default AbstractReportRoute.extend({
       accountsServantName: hash.settings.accountsServantName,
       month: hash.month.format('MMMM'),
       year: hash.month.year(),
-      openingBalance: hash.settings.openingBalance + hash.deposits.totalOpening + hash.incomingTransfers.opening - hash.outgoingCheques.opening + hash.interestPayments.opening - hash.wefts.totalOpening,
+      openingBalance: hash.settings.openingBalance + hash.settings.otherBalance + hash.deposits.totalOpening + hash.incomingTransfers.opening - hash.outgoingCheques.opening + hash.interestPayments.opening - hash.wefts.totalOpening,
 
       localIncomeItems: [
-        {title: 'Congregation Contributions', value: hash.meetings.local},
+        {title: 'Congregation Contributions (Box)', value: hash.meetings.local},
+        {title: 'Congregation Contributions (CC)', value: hash.incomingTransfers.value},
         {title: 'Interest', value: hash.interestPayments.value},
       ], // localReceipts interest
-      localIncome: hash.meetings.local + hash.interestPayments.value,
+      localIncome: hash.meetings.local + hash.incomingTransfers.value + hash.interestPayments.value,
 
       localExpenditureItems: localExpenditureItems,
       localExpenditure: hash.outgoingCheques.value + hash.wefts.khahc + hash.wefts.gaa + hash.wefts.coaa + hash.wefts.ct,

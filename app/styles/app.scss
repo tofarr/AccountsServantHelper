@@ -334,5 +334,9 @@ h1,h2{
   }
   .statement{
     padding: 0 30px;
+    font-size: 14px;
+    th, .total td{
+      border-color: #AAA;
+    }
   }
 }

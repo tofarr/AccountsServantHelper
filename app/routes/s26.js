@@ -7,8 +7,6 @@ export default AbstractReportRoute.extend({
   modelCallback(hash, resolve){
     let model = {
       monthParam: hash.month.format('YYYY-MM'),
-      prevMonthParam: moment(hash.month).add(-1, 'month').format('YYYY-MM'),
-      nextMonthParam: moment(hash.month).add(1, 'month').format('YYYY-MM'),
       month: hash.month.format('MMMM'),
       year: hash.month.year(),
       monthEnding: hash.month.endOf('month').format('MMMM DD YYYY'),
@@ -75,9 +73,17 @@ export default AbstractReportRoute.extend({
 
   addDepositRows(deposits, rows){
     deposits.results.forEach((deposit) => {
+      var date = deposit.get('date');
+      var description = 'Deposit';
+      if(date.substring(0, 7) == deposit.get('forLastMeeting').substring(0, 7)){
+        date = this.dateStr(date);
+      }else{
+        description += ' (' + date + ')'
+        date = moment(deposit.get('forLastMeeting'), 'YYYY-MM-DD').endOf('month').format('MMDD');
+      }
       rows.push({
-        date: this.dateStr(deposit.get('date')),
-        description: 'Deposit to checking account',
+        date: date,
+        description: description,
         tc: 'D',
         receiptsOut: deposit.get('total'),
         checkingAccountIn: deposit.get('total')
@@ -90,7 +96,7 @@ export default AbstractReportRoute.extend({
       rows.push({
         date: this.dateStr(incomingTransfer.get('date')),
         description: 'Contributions Congregation Electronic (CongCredit)',
-        tc: 'CC',
+        tc: 'CE',
         checkingAccountIn: incomingTransfer.get('value')
       });
     });
@@ -125,8 +131,8 @@ export default AbstractReportRoute.extend({
   addWeftsRows(wefts, rows){
     wefts.results.forEach((weft) => {
       rows.push({
-        date: this.dateStr(weft.get('date')),
-        description: 'WEFTS ('+weft.get('transferId')+')',
+        date: moment(weft.get('forLastMeeting'), 'YYYY-MM-DD').endOf('month').format('MMDD'),
+        description: 'WEFTS ('+weft.get('transferId')+' on '+weft.get('date')+')',
         checkingAccountOut: weft.get('total'),
         subRows: [
           'Contributions - WW ' + money(weft.get('worldwide')),

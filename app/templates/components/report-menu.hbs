@@ -1,0 +1,15 @@
+<div class="report-actions">
+  <button type="button" {{action "print"}}>Print</button>
+  {{#unless (eq route "statement")}}
+    {{#link-to "statement" (query-params month=monthParam)}}<button>Statement</button>{{/link-to}}
+  {{/unless}}
+  {{#unless (eq route "s26")}}
+    {{#link-to "s26" (query-params month=monthParam)}}<button>S26</button>{{/link-to}}
+  {{/unless}}
+  {{#unless (eq route "s30")}}
+    {{#link-to "s30" (query-params month=monthParam)}}<button>S30</button>{{/link-to}}
+  {{/unless}}
+  {{#link-to route (query-params month=prevMonthParam)}}<button>Prev</button>{{/link-to}}
+  {{#link-to route (query-params month=nextMonthParam)}}<button>Next</button>{{/link-to}}
+</div>
+{{warning-list warnings=warnings}}

@@ -1,14 +1,7 @@
-
-<form class="print-form">
-  <div class="report-actions">
-    <button type="button" {{action "print"}}>Print</button>
-    {{#link-to "s26" (query-params month=model.monthParam)}}<button>S26</button>{{/link-to}}
-    {{#link-to "s30" (query-params month=model.monthParam)}}<button>S30</button>{{/link-to}}
-    {{#link-to "statement" (query-params month=model.prevMonthParam)}}<button>Prev</button>{{/link-to}}
-    {{#link-to "statement" (query-params month=model.nextMonthParam)}}<button>Next</button>{{/link-to}}
-  </div>
-  {{warning-list warnings=model.warnings}}
-</form>
+{{report-menu
+  route="statement"
+  monthParam=(readonly model.monthParam)
+  warnings=(readonly model.warnings)}}
 
 <div class="statement">
   <h1>{{model.month}} Statement Reconcilliation</h1>

@@ -1,13 +1,7 @@
-<form class="print-form">
-  <div class="report-actions">
-    <button type="button" {{action "print"}}>Print</button>
-    {{#link-to "statement" (query-params month=model.monthParam)}}<button>Statement</button>{{/link-to}}
-    {{#link-to "s30" (query-params month=model.monthParam)}}<button>S30</button>{{/link-to}}
-    {{#link-to "s26" (query-params month=model.prevMonthParam)}}<button>Prev</button>{{/link-to}}
-    {{#link-to "s26" (query-params month=model.nextMonthParam)}}<button>Next</button>{{/link-to}}
-  </div>
-  {{warning-list warnings=model.warnings}}
-</form>
+{{report-menu
+  route="s26"
+  monthParam=(readonly model.monthParam)
+  warnings=(readonly model.warnings)}}
 
 <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="s26-page1" viewBox="0 0 1700 2200">
   <image width="1700" height="2200" xlink:href="assets/images/S-26-1.png" />

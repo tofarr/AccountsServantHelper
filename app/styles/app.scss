@@ -232,6 +232,10 @@ h1,h2{
   border-top: none;
 }
 
+.bold{
+  font-weight: bold;
+}
+
 @media only screen and (min-width: 600px) {
   .mobile-only{
     display: none;

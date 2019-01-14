@@ -13,7 +13,7 @@
         <tr>
           <th></th>
           <th class="money">Actual Funds in Account</th>
-          <th class="money">Value on Bank Statement</th>
+          <th class="money">Value Shown on Bank Statement</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +27,7 @@
           <td class="money">{{money model.monthBalance}}</td>
           <td class="money">{{money model.monthStatement}}</td>
         </tr>
-        <tr>
+        <tr class="bold">
           <td>Closing Balance</td>
           <td class="money">{{money model.closingBalance}}</td>
           <td class="money">{{money model.closingStatement}}</td>
@@ -37,7 +37,7 @@
   </div>
 
   {{#if model.notInOpening.length}}
-    <h2>Not Yet Processed by Bank at on Date of Opening Balance</h2>
+    <h2>Not Yet Processed by Bank as of Date of Opening Balance</h2>
 
     <div class="table-container">
       <table class="crud-table not-in-closing-table" cellpadding="0" cellspacing="0">
@@ -65,7 +65,7 @@
 
 
   {{#if model.notInClosing.length}}
-    <h2>Not Yet Processed by Bank at on Date of Closing Balance</h2>
+    <h2>Not Yet Processed by Bank as of Date of Closing Balance</h2>
 
     <div class="table-container">
       <table class="crud-table not-in-opening-table" cellpadding="0" cellspacing="0">
@@ -118,7 +118,7 @@
           <td class="money">{{money row.balance}}</td>
         </tr>
         {{/each}}
-        <tr class="total">
+        <tr class="total bold">
           <td>Closing Balance</td>
           <td></td>
           <td></td>

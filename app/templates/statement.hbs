@@ -6,13 +6,14 @@
 <div class="statement">
   <h1>{{model.month}} Statement Reconcilliation</h1>
 
+  <p>Actual values in account usually differ from statement due to transactions not yet processed by bank</p>
   <div class="table-container">
     <table class="crud-table statment-table" cellpadding="0" cellspacing="0">
       <thead>
         <tr>
           <th></th>
-          <th class="money">Account</th>
-          <th class="money">Statement</th>
+          <th class="money">Actual Funds in Account</th>
+          <th class="money">Value on Bank Statement</th>
         </tr>
       </thead>
       <tbody>
@@ -22,7 +23,7 @@
           <td class="money">{{money model.openingStatement}}</td>
         </tr>
         <tr>
-          <td>Month Balance</td>
+          <td>Month Transaction Total</td>
           <td class="money">{{money model.monthBalance}}</td>
           <td class="money">{{money model.monthStatement}}</td>
         </tr>
@@ -36,7 +37,7 @@
   </div>
 
   {{#if model.notInOpening.length}}
-    <h2>Not In Statement Opening Balance</h2>
+    <h2>Not Yet Processed by Bank at on Date of Opening Balance</h2>
 
     <div class="table-container">
       <table class="crud-table not-in-closing-table" cellpadding="0" cellspacing="0">
@@ -64,7 +65,7 @@
 
 
   {{#if model.notInClosing.length}}
-    <h2>Not In Statement Closing Balance</h2>
+    <h2>Not Yet Processed by Bank at on Date of Closing Balance</h2>
 
     <div class="table-container">
       <table class="crud-table not-in-opening-table" cellpadding="0" cellspacing="0">

@@ -11,9 +11,12 @@
   {{money-field title="CT" value=model.ct disabled=disabled}}
 
   {{total-field value=total}}
-  {{#if submit}}
-    <div class="submit">
+
+  <div class="submit">
+    {{#if submit}}
       <button type="submit">{{submitText}}</button>
-    </div>
-  {{/if}}
+    {{/if}}
+    {{yield model}}
+  </div>
+
 </fieldset>

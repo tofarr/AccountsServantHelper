@@ -36,6 +36,8 @@
 
 {{#if viewItem}}
   {{#modal-dialog hasOverlay=true translucentOverlay=true onClickOverlay=(action toggleProperty "viewItem")}}
-    {{wefts-form model=viewItem class="popup-content" title="WEFTS Details"}}
+    {{#wefts-form model=viewItem class="popup-content" title="WEFTS Details"}}
+      {{yield viewItem}}
+    {{/wefts-form}}
   {{/modal-dialog}}
 {{/if}}

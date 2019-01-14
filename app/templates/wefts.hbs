@@ -1,2 +1,42 @@
-{{wefts-form model=model.newInstance submit=(action "create")}}
-{{wefts-list list=model.list remove=(action "remove")}}
+{{#if to62}}
+  <form class="print-form">
+    <div class="report-actions">
+      <button type="button" {{action "print"}}>Print</button>
+      <button {{action toggleProperty "to62"}}>Back to Form</button>
+    </div>
+  </form>
+
+  <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="to-62" viewBox="0 0 1700 2200">
+    <image width="1700" height="2200" xlink:href="assets/images/TO-62.png" />
+    <text x="498" y="160" text-anchor="middle" font-size="30">X</text>
+    <text x="1043" y="281" text-anchor="middle" font-size="30">CONGREGATION</text>
+
+    <text x="1450" y="959" text-anchor="end" font-size="30">{{money to62.coaa}}</text>
+    <text x="1450" y="1007" text-anchor="end" font-size="30">{{money to62.worldwideResolution}}</text>
+    <text x="1450" y="1086" text-anchor="end" font-size="30">{{money to62.khahc}}</text>
+    <text x="1450" y="1133" text-anchor="end" font-size="30">{{money to62.gaa}}</text>
+    <text x="1450" y="1181" text-anchor="end" font-size="30">{{money to62.coaa}}</text>
+    <text x="1450" y="1228" text-anchor="end" font-size="30">{{money 0}}</text>
+    <text x="224" y="1322" text-anchor="start" font-size="30">Convention Travel (CT)</text>
+    <text x="1450" y="1322" text-anchor="end" font-size="30">{{money to62.ct}}</text>
+
+    <text x="1450" y="1428" text-anchor="end" font-size="30">{{money to62Total}}</text>
+
+    <text x="1218" y="1534" text-anchor="start" font-size="40" font-family="monospaced" style="letter-spacing: 27px;">{{to62.transferId}}</text>
+
+    <text x="419" y="1510" text-anchor="middle" font-size="24">{{to62Year}}</text>
+    <text x="492" y="1510" text-anchor="middle" font-size="24">{{to62Month}}</text>
+    <text x="565" y="1510" text-anchor="middle" font-size="24">{{to62Date}}</text>
+
+    <text x="1450" y="1780" text-anchor="end" font-size="30">{{money 0}}</text>
+
+  </svg>
+
+{{else}}
+  {{#wefts-form model=model.newInstance submit=(action "create") as |weft|}}
+    <button {{action (mut to62) weft}}>TO-62</button>
+  {{/wefts-form}}
+  {{#wefts-list list=model.list remove=(action "remove") as |weft|}}
+    <button {{action (mut to62) weft}}>TO-62</button>
+  {{/wefts-list}}
+{{/if}}

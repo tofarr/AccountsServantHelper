@@ -20,7 +20,6 @@ Router.map(function() {
   this.route('backup');
   this.route('reports');
   this.route('statement');
-  this.route('to62');
 });
 
 export default Router;

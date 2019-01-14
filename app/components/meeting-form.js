@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { inject } from '@ember/service';
 import { computed } from '@ember/object';
 import add from '../utils/add';
+import { observer } from '@ember/object';
 
 export default Component.extend({
   tagName: 'form',
@@ -19,5 +20,19 @@ export default Component.extend({
     return !this.get('submit');
   }),
 
-  total : add('model.local','model.worldwide')
+  total : add('model.local','model.worldwide'),
+
+  cashChequeSetter: observer('model.local', 'model.worldwide', 'model.cash', 'model.cheques', function(){
+    let local = this.get('model.local');
+    let worldwide = this.get('model.worldwide');
+    if(local && worldwide){
+      let cash = this.get('model.cash');
+      let cheques = this.get('model.cheques');
+      if(cash && (!cheques)){
+        this.set('model.cheques', local + worldwide - cash);
+      }else if(cheques && !cash){
+        this.set('model.cash', local + worldwide - cheques);
+      }
+    }
+  }),
 });

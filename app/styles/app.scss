@@ -212,13 +212,52 @@ h1,h2{
   margin: 0;
 }
 
-.statement{
+.statement-page1,.statement-page2{
   padding: 0 10px 10px 10px;
 }
 
-.statement .table-container{
+.statement-page1 .table-container{
   overflow: auto;
   width: 100%;
+}
+
+.statement-page2 h1{
+  margin-bottom: 40px;
+}
+
+.statement-page2 .step{
+  display: flex;
+  flex-direction: row;
+  line-height: 32px;
+}
+
+.statement-page2 .step .num{
+  width: 30px;
+  flex-grow: 0;
+}
+
+.statement-page2 .step .description{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.statement-page2 .step .subtotal{
+  width: 180px;
+  flex-grow: 0;
+  border-bottom: 2px solid #4a6da7;
+  display: flex;
+  flex-direction: row;
+  padding-right: 10px;
+}
+
+.statement-page2 .step .amt{
+  flex-grow: 1;
+  text-align: right;
+}
+
+.statement-page2 .step .substeps{
+  padding: 0 50px;
 }
 
 .total td{
@@ -336,11 +375,14 @@ h1,h2{
     page-break-inside: avoid;
     margin: 0;
   }
-  .statement{
+  .statement-page1,.statement-page2{
     padding: 0 30px;
     font-size: 14px;
-    th, .total td{
+    th, .total td, .step .subtotal{
       border-color: #AAA;
     }
+  }
+  .statement-page1{
+    page-break-after: always;
   }
 }

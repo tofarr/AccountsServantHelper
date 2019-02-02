@@ -29,7 +29,7 @@ export default AbstractReportRoute.extend({
 
       localIncomeItems: [
         {title: 'Congregation Contributions (Box)', value: hash.meetings.local},
-        {title: 'Congregation Contributions (CC)', value: hash.incomingTransfers.value},
+        {title: 'Congregation Contributions (CE)', value: hash.incomingTransfers.value},
         {title: 'Interest', value: hash.interestPayments.value},
       ], // localReceipts interest
       localIncome: hash.meetings.local + hash.incomingTransfers.value + hash.interestPayments.value,

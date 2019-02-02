@@ -3,7 +3,7 @@
   monthParam=(readonly model.monthParam)
   warnings=(readonly model.warnings)}}
 
-<div class="statement">
+<div class="statement-page1">
   <h1>{{model.month}} Statement Reconcilliation</h1>
 
   <p>Actual values in account usually differ from statement due to transactions not yet processed by bank</p>
@@ -126,5 +126,68 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="statement-page2">
+  <h1>{{model.month}} Bank Statement Reconcilliation</h1>
+  <div class="step">
+    <div class="num">1.</div>
+    <div class="description">Balance shown on bank statement</div>
+    <div class="subtotal">
+      <div class="currency">$</div>
+      <div class="amt">{{money model.closingStatement}}</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">2.</div>
+    <div class="description">All deposits recorded in your checkbook but not shown on statement</div>
+    <div class="subtotal">
+      <div class="currency">$</div>
+      <div class="amt">{{money model.notInClosingTotal}}</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">3.</div>
+    <div class="description">Total of lines 1 and 2</div>
+    <div class="subtotal">
+      <div class="currency">$</div>
+      <div class="amt">{{money model.closingBalance}}</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">4.</div>
+    <div class="description">
+      <div>All checks/electronic funds transfers not yet paid by bank:</div>
+      <div class="substeps">
+        {{#each model.notInClosing as |notIn|}}
+          <div class="step">
+            <div class="description">{{notIn.description}}</div>
+            <div class="subtotal">
+              <div class="currency">$</div>
+              <div class="amt">{{money notIn.value}}</div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">5.</div>
+    <div class="description">All checks/electronic funds transfers not yet paid by bank:</div>
+    <div class="subtotal">
+      <div class="currency">$</div>
+      <div class="amt">{{money model.notInClosingTotal}}</div>
+    </div>
+  </div>
+  <div class="step">
+    <div class="num">5.</div>
+    <div class="description">
+      Reconciled bank balance
+    </div>
+    <div class="subtotal">
+      <div class="currency">$</div>
+      <div class="amt">{{money model.closingBalance}}</div>
+    </div>
   </div>
 </div>

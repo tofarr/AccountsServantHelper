@@ -34,6 +34,7 @@ export default AbstractReportRoute.extend({
       ret.push({
         type: 'Deposit',
         date: deposit.get('forLastMeeting'),
+        description: 'Deposit '+deposit.get('date'),
         statementDate: deposit.get('date'),
         value: deposit.get('total')
       })
@@ -42,6 +43,7 @@ export default AbstractReportRoute.extend({
       ret.push({
         type: 'Cheque '+outgoingCheque.get('chequeId'),
         date: outgoingCheque.get('issueDate'),
+        description: 'Cheque '+outgoingCheque.get('chequeId'),
         statementDate: outgoingCheque.get('processedDate'),
         value: -outgoingCheque.get('value')
       });
@@ -50,6 +52,7 @@ export default AbstractReportRoute.extend({
       ret.push({
         type: 'WEFTS',
         date: weft.get('forLastMeeting'),
+        description: 'WEFTS '+weft.get('transferId'),
         statementDate: weft.get('date'),
         value: -weft.get('total')
       });
@@ -76,7 +79,7 @@ export default AbstractReportRoute.extend({
     incomingTransfers.results.forEach((incomingTransfer) => {
       ret.push({
         date: incomingTransfer.get('date'),
-        description: 'Deposit CC ' + incomingTransfer.get('transferId'),
+        description: 'Deposit CE ' + incomingTransfer.get('transferId'),
         value: incomingTransfer.get('value')
       });
     });

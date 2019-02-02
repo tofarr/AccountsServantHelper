@@ -221,8 +221,16 @@ h1,h2{
   width: 100%;
 }
 
+.statement-page2{
+  overflow: auto;
+}
+
 .statement-page2 h1{
   margin-bottom: 40px;
+}
+
+.statement-page2>.step{
+  min-width: 500px;
 }
 
 .statement-page2 .step{
@@ -234,10 +242,12 @@ h1,h2{
 .statement-page2 .step .num{
   width: 30px;
   flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .statement-page2 .step .description{
   flex-grow: 1;
+  flex-shrink: 1;
   display: flex;
   flex-direction: column;
 }
@@ -245,6 +255,10 @@ h1,h2{
 .statement-page2 .step .subtotal{
   width: 180px;
   flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.statement-page2 .step .subtotal-inner{
   border-bottom: 2px solid #4a6da7;
   display: flex;
   flex-direction: row;
@@ -378,7 +392,7 @@ h1,h2{
   .statement-page1,.statement-page2{
     padding: 0 30px;
     font-size: 14px;
-    th, .total td, .step .subtotal{
+    th, .total td, .step .subtotal-inner{
       border-color: #AAA;
     }
   }

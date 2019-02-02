@@ -135,24 +135,30 @@
     <div class="num">1.</div>
     <div class="description">Balance shown on bank statement</div>
     <div class="subtotal">
-      <div class="currency">$</div>
-      <div class="amt">{{money model.closingStatement}}</div>
+      <div class="subtotal-inner">
+        <div class="currency">$</div>
+        <div class="amt">{{money model.closingStatement}}</div>
+      </div>
     </div>
   </div>
   <div class="step">
     <div class="num">2.</div>
     <div class="description">All deposits recorded in your checkbook but not shown on statement</div>
     <div class="subtotal">
-      <div class="currency">$</div>
-      <div class="amt">{{money model.notInClosingTotal}}</div>
+      <div class="subtotal-inner">
+        <div class="currency">$</div>
+        <div class="amt">{{money model.notInClosingTotal}}</div>
+      </div>
     </div>
   </div>
   <div class="step">
     <div class="num">3.</div>
     <div class="description">Total of lines 1 and 2</div>
     <div class="subtotal">
-      <div class="currency">$</div>
-      <div class="amt">{{money model.closingBalance}}</div>
+      <div class="subtotal-inner">
+        <div class="currency">$</div>
+        <div class="amt">{{money model.closingBalance}}</div>
+      </div>
     </div>
   </div>
   <div class="step">
@@ -164,8 +170,10 @@
           <div class="step">
             <div class="description">{{notIn.description}}</div>
             <div class="subtotal">
-              <div class="currency">$</div>
-              <div class="amt">{{money notIn.value}}</div>
+              <div class="subtotal-inner">
+                <div class="currency">$</div>
+                <div class="amt">{{money notIn.value}}</div>
+              </div>
             </div>
           </div>
         {{/each}}
@@ -176,8 +184,10 @@
     <div class="num">5.</div>
     <div class="description">All checks/electronic funds transfers not yet paid by bank:</div>
     <div class="subtotal">
-      <div class="currency">$</div>
-      <div class="amt">{{money model.notInClosingTotal}}</div>
+      <div class="subtotal-inner">
+        <div class="currency">$</div>
+        <div class="amt">{{money model.notInClosingTotal}}</div>
+      </div>
     </div>
   </div>
   <div class="step">
@@ -186,8 +196,10 @@
       Reconciled bank balance
     </div>
     <div class="subtotal">
-      <div class="currency">$</div>
-      <div class="amt">{{money model.closingBalance}}</div>
+      <div class="subtotal-inner">
+        <div class="currency">$</div>
+        <div class="amt">{{money model.closingBalance}}</div>
+      </div>
     </div>
   </div>
 </div>

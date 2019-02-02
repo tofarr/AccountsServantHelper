@@ -2,8 +2,11 @@ import crudController from '../utils/crud-controller';
 import add from '../utils/add';
 import { computed } from '@ember/object';
 import moment from 'moment';
+import { storageFor } from 'ember-local-storage';
 
 export default crudController('weft').extend({
+
+  settings: storageFor('settings'),
 
   to62Total: add('to62.worldwideResolution', 'to62.khahc', 'to62.gaa', 'to62.coaa', 'to62.ct', 'to62.worldwide'),
 
